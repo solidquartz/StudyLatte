@@ -1,7 +1,7 @@
 -- schema/02_create_urls.sql
 DROP TABLE IF EXISTS urls CASCADE;
 -- CREATE URLS
-CREATE TABLE urls (
+CREATE TABLE study_rooms (
   id SERIAL PRIMARY KEY,
   user_id integer REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   long_url character varying(255) NOT NULL,
