@@ -1,7 +1,7 @@
-
-import './App.css';
+import './styles/app.scss';
 import axios from 'axios';
 import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
