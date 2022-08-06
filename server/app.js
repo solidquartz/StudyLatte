@@ -20,4 +20,7 @@ app.use('/', indexRouter);
 //database
 app.use('/users', usersRouter(db));
 
+const study_roomsRouter = require('./routes/study_rooms')
+app.use('/study_rooms', study_roomsRouter(db));
+
 module.exports = app;
