@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Link } from '@chakra-ui/react';
+import { Heading, Link } from '@chakra-ui/react';
 
 
 export const CreateRoom = () => {
@@ -8,7 +8,7 @@ export const CreateRoom = () => {
   return (
     <main>
       <div>
-        <h1>Create Room</h1>
+        <Heading>Create a Study Room</Heading>
       </div>
 
     </main>

@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Link } from '@chakra-ui/react';
+import { Heading, Link } from '@chakra-ui/react';
 
 
 export const EditAccount = () => {
@@ -8,7 +8,7 @@ export const EditAccount = () => {
   return (
     <main>
       <div>
-        <h1>Edit Account</h1>
+        <Heading>Edit Your Account</Heading>
       </div>
 
     </main>

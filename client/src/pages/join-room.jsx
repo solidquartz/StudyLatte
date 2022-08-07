@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Link } from '@chakra-ui/react';
+import { Heading, Link } from '@chakra-ui/react';
 
 
 export const JoinRoom = () => {
@@ -8,7 +8,7 @@ export const JoinRoom = () => {
   return (
     <main>
       <div>
-        <h1>Join Room</h1>
+        <Heading>Join a Study Room</Heading>
       </div>
 
     </main>

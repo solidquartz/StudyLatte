@@ -21,7 +21,7 @@ export const Signup = () => {
     <main>
 
     <Flex bg="gray.100" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md" w={64}>
+      <Box bg="white" p={6} rounded="md" w={80}>
         <Formik
           initialValues={{
             email: "",
@@ -36,7 +36,7 @@ export const Signup = () => {
               <form onSubmit={handleSubmit}>
                 
                 <VStack spacing={4} align="flex-start">
-                  <Heading>Welcome Back!</Heading>
+                  <Heading>Create an Account</Heading>
                 <FormControl>
                   <FormLabel htmlFor="email">Email Address</FormLabel>
                   <Field
@@ -69,15 +69,6 @@ export const Signup = () => {
                     
                   <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
-                  
-                <Field
-                  as={Checkbox}
-                  id="rememberMe"
-                  name="rememberMe"
-                  colorScheme="purple"
-                >
-                  Remember me?
-                  </Field>
                   
                 <Button type="submit" colorScheme="purple" width="full">
                   Sign Up
