@@ -21,9 +21,8 @@ export const Test = () => {
 
   return (
 
-
     <div className="Home">
-      <h1>Hello World!</h1>
+      <h1>Database Test</h1>
       <button onClick={handleClick}>
         Get Users!
       </button>
