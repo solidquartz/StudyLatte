@@ -57,7 +57,7 @@ export const Login = () => {
               justifyContent="center"
               onSubmit={formik.handleSubmit}
             >
-              <Heading>Sign Up</Heading>
+              <Heading>Log In</Heading>
 
               <TextField
                 name="email"
@@ -72,7 +72,7 @@ export const Login = () => {
               />
 
               <Button type="submit" colorScheme="purple" width="full">
-                Sign Up
+                Log In
               </Button>
 
             </VStack>
