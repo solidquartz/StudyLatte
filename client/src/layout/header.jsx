@@ -44,7 +44,7 @@ export const Header = () => {
             <Button
               as="button"
               variant="ghost"
-              aria-label="join-room"
+              aria-label="join room"
               my={5}
               w="100%"
             >
@@ -56,7 +56,7 @@ export const Header = () => {
             <Button
               as="button"
               variant="ghost"
-              aria-label="create-room"
+              aria-label="create room"
               my={5}
               w="100%"
             >
@@ -68,7 +68,7 @@ export const Header = () => {
             <Button
               as="button"
               variant="ghost"
-              aria-label="login"
+              aria-label="log in"
               my={5}
               w="100%"
             >
@@ -80,11 +80,23 @@ export const Header = () => {
             <Button
               as="button"
               variant="ghost"
-              aria-label="signup"
+              aria-label="sign up"
               my={5}
               w="100%"
             >
               Sign Up
+            </Button>
+          </RouterLink>
+
+          <RouterLink to="/">
+            <Button
+              as="button"
+              variant="ghost"
+              aria-label="edit account"
+              my={5}
+              w="100%"
+            >
+              Edit Account
             </Button>
           </RouterLink>
 
@@ -200,6 +212,18 @@ export const Header = () => {
               w="100%"
             >
               Sign Up
+            </Button>
+          </RouterLink>
+
+          <RouterLink to="/">
+            <Button
+              as="button"
+              variant="ghost"
+              aria-label="edit account"
+              my={5}
+              w="100%"
+            >
+              Edit Account
             </Button>
           </RouterLink>
 
