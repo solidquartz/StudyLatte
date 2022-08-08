@@ -15,13 +15,14 @@ export const Test = () => {
   const usersList = users.map(user =>
     <li key={user.id}>
       <p>{user.id}</p>
+      <p>{user.name}</p>
+      <p>{user.display_name}</p>
       <p>{user.email}</p>
       <p>{user.password}</p>
     </li>
   );
 
   return (
-
     <div className="Home">
       <Heading>Database Test</Heading>
       <Button onClick={handleClick}>
