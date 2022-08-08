@@ -13,6 +13,7 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
+import Axios from "axios";
 import TextField from './textField';
 
 //using chakra with formik: https://chakra-ui.com/getting-started/with-formik
@@ -52,6 +53,9 @@ export const Signup = () => {
       })}
       onSubmit={(values, actions) => {
         alert(JSON.stringify(values, null, 5));
+        Axios.post("/users/signup").then( results=>{
+          console.log(results)
+        })
         actions.resetForm();
       }}
     >

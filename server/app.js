@@ -1,19 +1,45 @@
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./configs/db.config');
-
+const bodyParser = require("body-parser");
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
 const app = express();
-app.use(cors());
+const session = require("express-session");
+
+
+
+
+app.use(cors(({
+  origin: ["http//localhost:3000"],
+  methods: ["GET", "POST"],
+  credentials: true //enable cookies
+})));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userID",
+    secret: "test",// we have to create a secret word
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expire: 60 * 60 * 72,
+    },
+
+  })
+);
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -22,5 +48,8 @@ app.use('/users', usersRouter(db));
 
 const study_roomsRouter = require('./routes/study_rooms')
 app.use('/study_rooms', study_roomsRouter(db));
+
+
+
 
 module.exports = app;
