@@ -1,6 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
 import {
-  Link,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink
