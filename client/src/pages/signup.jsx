@@ -19,6 +19,8 @@ export const Signup = () => {
 
   return (
 
+    <main>
+
     <Formik
       initialValues={{
         email: "",
@@ -52,7 +54,7 @@ export const Signup = () => {
 
       {formik => (
         <Flex
-          bg="gray.100"
+          bg="white.100"
           align="center"
           justify="center"
           h="100vh"
@@ -111,7 +113,8 @@ export const Signup = () => {
           </Box>
         </Flex>
       )}
-    </Formik>
+      </Formik>
+      </main>
 
   );
 };

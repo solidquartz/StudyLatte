@@ -4,6 +4,8 @@ import {
   Button,
   Flex,
   IconButton,
+  Text,
+  Highlight
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -26,7 +28,12 @@ export const Header = () => {
 
         {/* Desktop view */}
         <Flex
-          display={["none", "none", "flex", "flex"]}>
+          display={["none", "none", "flex", "flex"]}
+        align="center">
+
+          <Highlight query="Username" styles={{px: "2", py: "1", rounded: "full", bg: "purple.100"}}>
+            Username
+          </Highlight>
 
           <RouterLink to="/">
             <Button
