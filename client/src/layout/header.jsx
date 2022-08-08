@@ -24,10 +24,11 @@ export const Header = () => {
         align="center"
       >
 
+        {/* Desktop view */}
         <Flex
           display={["none", "none", "flex", "flex"]}>
 
-          <RouterLink to="/home">
+          <RouterLink to="/">
             <Button
               as="button"
               variant="ghost"
@@ -87,7 +88,7 @@ export const Header = () => {
             </Button>
           </RouterLink>
 
-          <RouterLink to="/home">
+          <RouterLink to="/">
             <Button
               as="button"
               variant="ghost"
@@ -101,7 +102,6 @@ export const Header = () => {
 
         </Flex>
 
-
         <IconButton
           aria-label="Open Menu"
           size="lg"
@@ -112,6 +112,7 @@ export const Header = () => {
         />
       </Flex>
 
+      {/* Mobile View */}
       <Flex
         w='100vw'
         display={display}
@@ -142,7 +143,7 @@ export const Header = () => {
           align="center"
         >
 
-          <RouterLink to="/home">
+          <RouterLink to="/">
             <Button
               as="button"
               variant="ghost"
@@ -202,7 +203,7 @@ export const Header = () => {
             </Button>
           </RouterLink>
 
-          <RouterLink to="/home">
+          <RouterLink to="/">
             <Button
               as="button"
               variant="ghost"
