@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Button, Heading } from '@chakra-ui/react';
 
 export const Test = () => {
 
@@ -22,10 +23,10 @@ export const Test = () => {
   return (
 
     <div className="Home">
-      <h1>Database Test</h1>
-      <button onClick={handleClick}>
+      <Heading>Database Test</Heading>
+      <Button onClick={handleClick}>
         Get Users!
-      </button>
+      </Button>
       {users && usersList}
     </div>
   );
