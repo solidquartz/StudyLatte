@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, useFormik } from "formik";
+import { Formik, Field } from "formik";
 import {
   Box,
   Button,
@@ -13,6 +13,7 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
+import TextField from './textField';
 
 //using chakra with formik: https://chakra-ui.com/getting-started/with-formik
 //formik docs: https://formik.org/docs/tutorial
@@ -33,7 +34,8 @@ export const Signup = () => {
       }}
       validationSchema={Yup.object({
         email: Yup.string()
-          .required("Email required"),
+          .required("Email required")
+          .email("Please use a valid email address"),
         username: Yup.string()
           .required("Username required")
           .max(10, "Username is too long (max. 15)")
@@ -76,56 +78,35 @@ export const Signup = () => {
             >
               <Heading>Sign Up</Heading>
 
-              <FormControl isInvalid={formik.errors.email && formik.touched.email}>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input
-                  name="email"
-                  type="text"
-                  placeholder="you@email.com"
-                  {...formik.getFieldProps("email")}
-                />
-                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
-              </FormControl>
+              <TextField
+                name="email"
+                type="email"
+                placeholder="Email Address"
+              />
 
-              <FormControl isInvalid={formik.errors.username && formik.touched.username}>
-                <FormLabel htmlFor="username">Username</FormLabel>
-                <Input
-                  name="username"
-                  type="text"
-                  {...formik.getFieldProps("username")}
-                />
-                <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
-              </FormControl>
+              <TextField
+                name="username"
+                type="text"
+                placeholder="Username"
+              />
 
-              <FormControl isInvalid={formik.errors.displayName && formik.touched.displayName}>
-                <FormLabel htmlFor="username">Display Name</FormLabel>
-                <Input
-                  name="displayName"
-                  type="text"
-                  {...formik.getFieldProps("displayName")}
-                />
-                <FormErrorMessage>{formik.errors.displayName}</FormErrorMessage>
-              </FormControl>
+              <TextField
+                name="displayName"
+                type="text"
+                placeholder="Display Name"
+              />
 
-              <FormControl isInvalid={formik.errors.password && formik.touched.password}>
-                <FormLabel htmlFor="username">Password</FormLabel>
-                <Input
-                  name="password"
-                  type="text"
-                  {...formik.getFieldProps("password")}
-                />
-                <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
-              </FormControl>
+              <TextField
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
 
-              <FormControl isInvalid={formik.errors.confirmPassword && formik.touched.confirmPassword}>
-                <FormLabel htmlFor="username">Confirm Password</FormLabel>
-                <Input
-                  name="confirmPassword"
-                  type="text"
-                  {...formik.getFieldProps("confirmPassword")}
-                />
-                <FormErrorMessage>{formik.errors.confirmPassword}</FormErrorMessage>
-              </FormControl>
+              <TextField
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+              />
 
               <Button type="submit" colorScheme="purple" width="full">
                 Sign Up
@@ -136,7 +117,7 @@ export const Signup = () => {
           </Box>
         </Flex>
       )}
-    </Formik >
+    </Formik>
 
   );
 };
