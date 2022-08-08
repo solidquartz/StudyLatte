@@ -1,14 +1,9 @@
 import React from 'react';
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
   VStack,
   Heading
 } from "@chakra-ui/react";
@@ -38,11 +33,11 @@ export const Signup = () => {
           .email("Please use a valid email address"),
         username: Yup.string()
           .required("Username required")
-          .max(10, "Username is too long (max. 15)")
+          .max(15, "Username is too long (max. 15)")
           .min(4, "Username is too short (min. 4"),
         displayName: Yup.string()
           .required("Display Name required")
-          .max(10, "Display Name is too long (max 15)"),
+          .max(15, "Display Name is too long (max 15)"),
         password: Yup.string()
           .required("Password required")
           .min(10, "Password is too short (min. 10)"),

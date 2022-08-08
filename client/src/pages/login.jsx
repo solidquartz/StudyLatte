@@ -1,92 +1,86 @@
 import React from 'react';
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
   VStack,
   Heading
 } from "@chakra-ui/react";
+import * as Yup from 'yup';
+import TextField from './textField';
 
-//for the form to work with ChakraUI, use <Input> and <Button> (capital letter)
+//using chakra with formik: https://chakra-ui.com/getting-started/with-formik
+//formik docs: https://formik.org/docs/tutorial
+//yup validation: https://github.com/jquense/yup
 
+//component:  
 export const Login = () => {
 
   return (
-    <main>
 
-      <Flex bg="gray.100" align="center" justify="center" h="100vh">
-        <Box bg="white" p={6} rounded="md" w={80}>
-          <Formik
-            initialValues={{
-              email: "",
-              password: "",
-              rememberMe: false
-            }}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2));
-            }}
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validationSchema={Yup.object({
+        email: Yup.string()
+          .required("Email required")
+          .email("Please use a valid email address"),
+        password: Yup.string()
+          .required("Password required")
+      })}
+      onSubmit={(values, actions) => {
+        alert(JSON.stringify(values, null, 2));
+        actions.resetForm();
+      }}
+    >
+
+      {formik => (
+        <Flex
+          bg="gray.100"
+          align="center"
+          justify="center"
+          h="100vh"
+        >
+          <Box
+            bg="white"
+            p={6}
+            rounded="md"
+            w={80}
           >
-            {({ handleSubmit, errors, touched }) => (
-              <form onSubmit={handleSubmit}>
-                
-                <VStack spacing={4} align="flex-start">
-                  <Heading>Welcome Back!</Heading>
-                  <FormControl>
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <Field
-                      as={Input}
-                      id="email"
-                      name="email"
-                      type="email"
-                      variant="filled"
-                    />
-                  </FormControl>
+            <VStack
+              as="form"
+              mx="auto"
+              spacing={5}
+              justifyContent="center"
+              onSubmit={formik.handleSubmit}
+            >
+              <Heading>Sign Up</Heading>
 
-                  <FormControl isInvalid={!!errors.password && touched.password}>
-                    <FormLabel htmlFor="password">Password</FormLabel>
-                    <Field
-                      as={Input}
-                      id="password"
-                      name="password"
-                      type="password"
-                      variant="filled"
-                      validate={(value) => {
-                        let error;
+              <TextField
+                name="email"
+                type="email"
+                placeholder="Email Address"
+              />
 
-                        if (value.length < 5) {
-                          error = "Password must contain at least 6 characters";
-                        }
+              <TextField
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
 
-                        return error;
-                      }}
-                    />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  </FormControl>
+              <Button type="submit" colorScheme="purple" width="full">
+                Sign Up
+              </Button>
 
-                  <Field
-                    as={Checkbox}
-                    id="rememberMe"
-                    name="rememberMe"
-                    colorScheme="purple"
-                  >
-                    Remember me?
-                  </Field>
-                  
-                  <Button type="submit" colorScheme="purple" width="full">
-                    Log In
-                  </Button>
-                </VStack>
-              </form>
-            )}
-          </Formik>
-        </Box>
-      </Flex>
-    </main>
+            </VStack>
+
+          </Box>
+        </Flex>
+      )}
+    </Formik>
+
   );
 };

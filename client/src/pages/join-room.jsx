@@ -1,5 +1,5 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { Heading, Link } from '@chakra-ui/react';
+// import { Link as RouterLink } from 'react-router-dom';
+import { Heading } from '@chakra-ui/react';
 
 
 export const JoinRoom = () => {
