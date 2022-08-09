@@ -11,7 +11,8 @@ import {
   CreateRoom
 } from './pages';
 import {
-  StudyRoom
+  StudyRoom,
+  Chats
 } from './rooms'
 
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/create-room" element={<CreateRoom />} />
         <Route path="/study-room" element={<StudyRoom />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/chats" element={<Chats />} />
         </Route>
       </Routes>
     </Router>

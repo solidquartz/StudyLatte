@@ -3,6 +3,7 @@ import {
 } from '@chakra-ui/react';
 import io from 'socket.io-client';
 import { useState } from 'react';
+import{Chats} from "../rooms/chats"
 
 const socket = io.connect("/");
 
@@ -13,6 +14,7 @@ export const StudyRoom = () => {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
+      socket.emit("join_room", room); 
 
     }
   };
@@ -35,7 +37,11 @@ export const StudyRoom = () => {
           setRoom(event.target.value);
         }}
       />
-      <button>Join a Room</button>
+      <button onClick = {joinRoom}>Join a Room</button>
+
+      <Chats socket = {socket} username = {username} room = {room}/>
+
+
 
 
     </main>
