@@ -13,6 +13,7 @@ export const StudyRoom = () => {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
+      socket.emit("join_room")
 
     }
   };
