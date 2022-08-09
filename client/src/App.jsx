@@ -10,6 +10,9 @@ import {
   JoinRoom,
   CreateRoom
 } from './pages';
+import {
+  StudyRoom
+} from './rooms'
 
 
 export default function App() {
@@ -24,6 +27,7 @@ export default function App() {
         <Route path="/edit-account" element={<EditAccount />} />
         <Route path="/join-room" element={<JoinRoom />} />
         <Route path="/create-room" element={<CreateRoom />} />
+        <Route path="/study-room" element={<StudyRoom />} />
         <Route path="/test" element={<Test />} />
         </Route>
       </Routes>
