@@ -7,18 +7,11 @@ import {
   VStack,
   Heading,
   ButtonGroup,
-  FormControl,
-  Select,
-  Radio,
-  RadioGroup,
-  HStack,
-  FormHelperText,
-  FormLabel,
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import TextField from '../helpers/textField';
+import TextField from '../components/TextField';
 import { Link as RouterLink } from 'react-router-dom';
-import TextAreaField from '../helpers/textAreaField';
+import TextAreaField from '../components/TextAreaField';
 
 
 export const CreateRoom = () => {
@@ -115,35 +108,8 @@ export const CreateRoom = () => {
                   type="text"
                   placeholder='Description' />
 
-                <FormControl>
-                  <Select placeholder='# of People'>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                  </Select>
-                </FormControl>
 
-                <FormControl as='fieldset'>
-                  <RadioGroup defaultValue='Itachi'>
-                    <HStack spacing='24px'>
-                      <Radio value='true'>Pomodoro</Radio>
-                      <Radio value='false'>Custom</Radio>
-                    </HStack>
-                  </RadioGroup>
-                  <FormHelperText>25 study, 5 break, 30 long break</FormHelperText>
-                </FormControl>
-
-                <FormLabel>Study Time</FormLabel>
-                <TextField
-                  name="study_time"
-                  type="number"
-                  placeholder="Study Time"
-                />
+                
 
                 
                 <ButtonGroup gap="2">
