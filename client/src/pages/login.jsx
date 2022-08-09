@@ -8,7 +8,7 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import TextField from './textField';
+import TextField from './components/TextField';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -18,7 +18,7 @@ import axios from 'axios';
 
 //component:  
 export const Login = () => {
-  const [login,setlogin] = useState("")
+  const [login,setLogin] = useState("")
   const [error,setError] = useState("")
 
   return (
@@ -42,21 +42,21 @@ export const Login = () => {
 
           }).then((response) => {
             if (response.data.emailError) {
-              setlogin("")
+              setLogin("")
               setError(response.data.emailError)
               
             }
 
             else if(response.data.passwordError){
               setError("")
-              setlogin("")
+              setLogin("")
               setError(response.data.passwordError)
 
             }
             else{
               // console.log("response from server", response.data)
               setError("")
-              setlogin(response.data)
+              setLogin(response.data)
 
             }
            

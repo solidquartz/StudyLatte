@@ -4,7 +4,6 @@ import {
   Button,
   Flex,
   IconButton,
-  Text,
   Highlight
 } from '@chakra-ui/react';
 import {

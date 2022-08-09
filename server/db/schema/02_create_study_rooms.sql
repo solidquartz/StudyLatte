@@ -23,7 +23,7 @@ CREATE TABLE study_rooms (
   
 
   music VARCHAR(255) NOT NULL,
-  backgroun_img VARCHAR(255),
+  background_img VARCHAR(255),
 
 
 
