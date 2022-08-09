@@ -3,7 +3,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import '../styles/app.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export const Chats = ({ socket, username, room }) => {
@@ -23,6 +23,12 @@ export const Chats = ({ socket, username, room }) => {
     }
 
   }
+  useEffect(() => {
+    socket.on("receive_message", (data)=> {
+      console.log(data)
+    })
+
+  },[socket])
 
 
   return (
