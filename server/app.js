@@ -23,6 +23,10 @@ const io = new Server(server, {
 //socket = events for user who connected
 io.on("connection", (socket) => {
   console.log(socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected", socket.id);
+  })
 })
 
 //cors
