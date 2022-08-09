@@ -53,6 +53,7 @@ module.exports = (db) => {
     db.query(`SELECT * from users where id = $1`,[user_id])
     .then(result => {
       const user = result.rows[0]
+      console.log("userinfo", user)
       res.send({name: user.name, display_name: user.display_name, email: user.email})
 
     })
