@@ -1,8 +1,12 @@
 // -- routes/catRoutes.js
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const app = require('../app');
+
 const saltRounds = 10;
+
+
+
+
 
 
 
@@ -70,37 +74,54 @@ module.exports = (db) => {
 
 
 
-  // router.post("/login", (req, res) => {
-  //   const email = req.body.email;
-  //   const password = req.body.password;
+  router.post("/login", (req, res) => {
+    console.log("you are in POST /users/login")
+    const email = req.body.email;
+    const password = req.body.password;
+    //bcrypt.compare(password, result[0].password
 
-  //   db.query(
-  //     "SELECT * FROM users WHERE email = ?;",
-  //     email,
-  //     (err, result) => {
-  //       if (err) {
-  //         res.send({ err: err });
-  //       }
-  //       if (result.length > 0) {
-  //         bcrypt.compare(password, result[0].password, (error, response) => {
-  //           if (response) {
-  //             req.session.user = result;
-  //             console.log(req.session.user); // HERE WE HAVE TO CHECK IN THE TERMINAL IF WE R GONNA SEE NAME AND ENCRYPTED PASSWORD
+    const query = `SELECT * from users where email = $1`
 
-  //             res.send(result)
-  //           } else {
-  //             res.send({ message: "Wrong name/password!" });
+    db.query(query,[email])
+    .then(result => {
+      console.log("result",result.rows)
 
-  //           }
-  //         });
-  //       } else {
-  //         res.send({ message: "User doesn't exist" })
-  //       }
-  //     }
+      if (result.rows.length === 0) {
+        res.send({emailError: "Email does not exists"})
+      } 
 
-  //   );
 
-  // })
+      else if (result.rows.length > 0) {
+        const actualPassword = result.rows[0].password;
+
+        const compare = bcrypt.compareSync(password,actualPassword)
+        
+          //give password is matching
+          if(compare) {
+            req.session.user = result.rows[0].id;
+            console.log("now the session is", req.session.user);
+            res.send(result.rows[0])
+          }
+
+
+          //given password is not matching
+          else {
+            console.log("failed to login")
+            res.send({passwordError: "Password does not match"})
+          }
+
+
+
+        
+      }
+
+    })
+
+    
+
+    
+
+  })
 
 
 

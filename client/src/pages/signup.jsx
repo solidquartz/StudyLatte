@@ -53,8 +53,8 @@ export const Signup = () => {
      
 
         axios.post("/users/signup", {
-          name: values.username,
-          display_name: values.displayName,
+          name: values.name,
+          display_name: values.display_name,
           password: values.password,
           email: values.email,
         }).then((response) => {
