@@ -2,15 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { Formik, Field } from "formik";
 import { useState } from 'react';
+
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
   VStack,
   Heading
 } from "@chakra-ui/react";
@@ -26,11 +22,13 @@ export const Signup = () => {
  const [signup,setsignup] = useState("")
   return (
 
+    <main>
+
     <Formik
       initialValues={{
         email: "",
-        username: "",
-        displayName: "",
+        name: "",
+        display_name: "",
         password: "",
         confirmPassword: "",
       }}
@@ -38,19 +36,18 @@ export const Signup = () => {
         email: Yup.string()
           .required("Email required")
           .email("Please use a valid email address"),
-        username: Yup.string()
+        name: Yup.string()
           .required("Username required")
-          .max(10, "Username is too long (max. 15)")
+          .max(15, "Username is too long (max. 15)")
           .min(4, "Username is too short (min. 4"),
-        displayName: Yup.string()
+        display_name: Yup.string()
           .required("Display Name required")
-          .max(10, "Display Name is too long (max 15)"),
+          .max(15, "Display Name is too long (max 15)"),
         password: Yup.string()
           .required("Password required")
           .min(10, "Password is too short (min. 10)"),
         confirmPassword: Yup.string()
-          .required("Please type your password again")
-          .min(10, "Password is too short (min. 10)")
+          .oneOf([Yup.ref('password'), null], "Passwords must match")
       })}
       onSubmit={(values, actions) => {
      
@@ -73,7 +70,7 @@ export const Signup = () => {
 
       {formik => (
         <Flex
-          bg="gray.100"
+          bg="white.100"
           align="center"
           justify="center"
           h="100vh"
@@ -100,13 +97,13 @@ export const Signup = () => {
               />
 
               <TextField
-                name="username"
+                name="name"
                 type="text"
                 placeholder="Username"
               />
 
               <TextField
-                name="displayName"
+                name="display_name"
                 type="text"
                 placeholder="Display Name"
               />
@@ -132,7 +129,8 @@ export const Signup = () => {
           </Box>
         </Flex>
       )}
-    </Formik>
+      </Formik>
+      </main>
 
   );
 };
