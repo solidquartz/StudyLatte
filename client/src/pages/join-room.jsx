@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
+import '../styles/app.scss';
 
 export const JoinRoom = () => {
 
@@ -35,7 +36,7 @@ export const JoinRoom = () => {
             bg="white.100"
             align="center"
             justify="center"
-            h="100vh"
+            h="60vh"
           >
             <Box
               bg="white"

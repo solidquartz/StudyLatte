@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import TextField from '../components/TextField';
 import { useState } from 'react';
 import axios from 'axios';
+import '../styles/app.scss';
 
 //using chakra with formik: https://chakra-ui.com/getting-started/with-formik
 //formik docs: https://formik.org/docs/tutorial

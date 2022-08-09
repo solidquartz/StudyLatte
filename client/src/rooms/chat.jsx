@@ -1,12 +1,12 @@
 // import { Link as RouterLink } from 'react-router-dom';
-import {
-  Heading,
-} from '@chakra-ui/react';
 import '../styles/app.scss';
 import { useEffect, useState } from 'react';
+import '../styles/app.scss';
 
 
-export const Chats = ({ socket, username, room }) => {
+export const Chat = ({ socket, username, room }) => {
+
+  //state of input
   const [currentMessage, setCurrentMessage] = useState("")
  
   //wait until message update
@@ -21,8 +21,9 @@ export const Chats = ({ socket, username, room }) => {
       };
       await socket.emit("send_message", messageData);
     }
-
   }
+
+  //receive data (message) from the server
   useEffect(() => {
     socket.on("receive_message", (data)=> {
       console.log(data)
@@ -33,20 +34,20 @@ export const Chats = ({ socket, username, room }) => {
 
   return (
 
-    <div>
+    <div className="chat-window">
       <div className='chat-header'>
         <p> Live chat</p>
       </div>
 
       <div className='chat-body'></div>
+
       <div className='chat-footer'>
-        <input type="text" placeholder='Hey'
+        <input type="text" placeholder='Type your message'
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button onClick={sendMessage}>Send</button>
 
       </div>
     </div>

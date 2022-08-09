@@ -27,11 +27,12 @@ io.on("connection", (socket) => {
   //join a room
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`user with ID: ${socket.id} joine room: ${data}`)
+    console.log(`user with ID: ${socket.id} joined room: ${data}`)
   })
+
+  //send message data to client to a SPECIFIC room (socket.to(room(id))
   socket.on("send_message", (data) => {
-    // console.log(data)
-    // data.room = roomid
+    console.log(data)
     socket.to(data.room).emit("receive_message", data);
   })
 
