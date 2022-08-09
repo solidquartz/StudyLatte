@@ -13,6 +13,9 @@ import {
 import {
   StudyRoom
 } from './rooms'
+import io from 'socket.io-client';
+
+const socket = io.connect("/")
 
 
 export default function App() {
