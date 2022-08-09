@@ -45,6 +45,8 @@ module.exports = (db) => {
     const password = req.body.password;
     const email = req.body.email;
 
+    console.log("post:signup working", req.body)
+
     bcrypt.hash(password, saltRounds, (err, hash) => {
       if (err) {
         console.log(err);
@@ -52,11 +54,14 @@ module.exports = (db) => {
 
       db.query(
         `INSERT INTO users (name, display_name, email, password) VALUES($1,$2,$3,$4);`,
-        [name, display_name, email, hash],
-        (err, result) => {
-          console.log(err);
-        }
-      );
+        [name, display_name, email, hash]).then(result => {
+          res.json(result.rows);
+
+        })
+      //   (err, result) => {
+      //     console.log(err);
+      //   }
+      // );
     });
   });
 

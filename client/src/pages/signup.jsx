@@ -1,6 +1,7 @@
 import React from 'react';
-import Axios from "axios";
+import axios from 'axios';
 import { Formik, Field } from "formik";
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -22,7 +23,7 @@ import TextField from './textField';
 
 //component:  
 export const Signup = () => {
-
+ const [signup,setsignup] = useState("")
   return (
 
     <Formik
@@ -52,14 +53,16 @@ export const Signup = () => {
           .min(10, "Password is too short (min. 10)")
       })}
       onSubmit={(values, actions) => {
+     
 
-        Axios.post("/users/signup", {
+        axios.post("/users/signup", {
           name: values.username,
           display_name: values.displayName,
           password: values.password,
           email: values.email,
         }).then((response) => {
-          console.log(response);
+          setsignup(response.data)
+          console.log(signup);
         });
 
         // alert(JSON.stringify(values, null, 5));
