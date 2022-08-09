@@ -1,5 +1,8 @@
 import React from 'react';
-import { Formik } from "formik";
+import axios from 'axios';
+import { Formik, Field } from "formik";
+import { useState } from 'react';
+
 import {
   Box,
   Button,
@@ -16,7 +19,7 @@ import TextField from './textField';
 
 //component:  
 export const Signup = () => {
-
+ const [signup,setsignup] = useState("")
   return (
 
     <main>
@@ -47,7 +50,20 @@ export const Signup = () => {
           .oneOf([Yup.ref('password'), null], "Passwords must match")
       })}
       onSubmit={(values, actions) => {
-        alert(JSON.stringify(values, null, 5));
+     
+
+        axios.post("/users/signup", {
+          name: values.username,
+          display_name: values.displayName,
+          password: values.password,
+          email: values.email,
+        }).then((response) => {
+          setsignup(response.data)
+          console.log(signup);
+        });
+
+        // alert(JSON.stringify(values, null, 5));
+
         actions.resetForm();
       }}
     >
