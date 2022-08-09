@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from "axios";
 import { Formik, Field } from "formik";
 import {
   Box,
@@ -13,7 +14,6 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import Axios from "axios";
 import TextField from './textField';
 
 //using chakra with formik: https://chakra-ui.com/getting-started/with-formik
@@ -52,10 +52,18 @@ export const Signup = () => {
           .min(10, "Password is too short (min. 10)")
       })}
       onSubmit={(values, actions) => {
-        alert(JSON.stringify(values, null, 5));
-        Axios.post("/users/signup").then( results=>{
-          console.log(results)
-        })
+
+        Axios.post("/users/signup", {
+          name: values.username,
+          display_name: values.displayName,
+          password: values.password,
+          email: values.email,
+        }).then((response) => {
+          console.log(response);
+        });
+
+        // alert(JSON.stringify(values, null, 5));
+
         actions.resetForm();
       }}
     >
