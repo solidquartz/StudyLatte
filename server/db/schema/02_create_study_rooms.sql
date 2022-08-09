@@ -22,7 +22,7 @@ CREATE TABLE study_rooms (
   password VARCHAR(255),
   
 
-  music VARCHAR(255) NOT NULL,
+  music VARCHAR(255) ,
   background_img VARCHAR(255),
 
 
