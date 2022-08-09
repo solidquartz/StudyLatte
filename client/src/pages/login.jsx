@@ -42,17 +42,24 @@ export const Login = () => {
 
           }).then((response) => {
             if (response.data.emailError) {
+              setlogin("")
               setError(response.data.emailError)
               
             }
 
-            if(response.data.passwordError){
+            else if(response.data.passwordError){
+              setError("")
+              setlogin("")
               setError(response.data.passwordError)
 
             }
-            console.log("response from server", response.data)
+            else{
+              console.log("response from server", response.data)
+              setError("")
+              setlogin(response.data)
 
-            setlogin(response.data)
+            }
+           
           });
   
         }}
