@@ -1,6 +1,7 @@
 // -- routes/catRoutes.js
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const app = require('../app');
 
 const saltRounds = 10;
 
@@ -10,29 +11,7 @@ const saltRounds = 10;
 
 
 
-// const [loginStatus, setLoginStatus] = useState("");
 
-// Axios.defaults.withCredentials = true
-
-
-// const login = () => {
-//   Axios.post("http://localhost:3001/login", {
-//     username: username,
-//     password: password,
-//   }).then((response) => {
-//     if (response.data.message){
-//     setLoginStatus(response.data.message);
-//   } else {
-//     setLoginStatus(response.data[0].username);
-//   }
-// })
-// };
-// useEffect(() => {
-//   Axios.get("http://localhost:3001/login").then ((response) => {
-//     console.log(response);
-//   })
-// },[])
-  
 
 
 
@@ -69,6 +48,40 @@ module.exports = (db) => {
     });
   });
 
+  router.get("/user_info/:id", (req, res) => {
+    const user_id = req.params.id
+    db.query(`SELECT * from users where id = $1`,[user_id])
+    .then(result => {
+      const user = result.rows[0]
+      console.log("userinfo", user)
+      res.send({name: user.name, display_name: user.display_name, email: user.email})
+
+    })
+  });
+
+  router.get("/login", (req, res) => {
+    console.log("cookie is set up in serverside")
+    if (req.session.user) {
+      res.send({ loggedIn: true, userID: req.session.user });
+    } else {
+      res.send({ loggedIn: false });
+    }
+  });
+
+
+
+  router.post("/logout", (req, res) => {
+    console.log("you are in GET users/logout")
+    if (!req.session.user) {
+      res.send({ error: "Not in login status" })
+
+    } else {
+      res.send({ loggedIn: false })
+      req.session.destroy();
+      // console.log("checkout session after logout",req.session.user);
+    }
+
+  })
 
 
 
@@ -82,44 +95,43 @@ module.exports = (db) => {
 
     const query = `SELECT * from users where email = $1`
 
-    db.query(query,[email])
-    .then(result => {
-      console.log("result",result.rows)
+    db.query(query, [email])
+      .then(result => {
+        console.log("result", result.rows)
 
-      if (result.rows.length === 0) {
-        res.send({emailError: "Email does not exists"})
-      } 
+        if (result.rows.length === 0) {
+          res.send({ emailError: "Email does not exists" })
+        }
 
 
-      else if (result.rows.length > 0) {
-        const actualPassword = result.rows[0].password;
+        else if (result.rows.length > 0) {
+          const actualPassword = result.rows[0].password;
 
-        const compare = bcrypt.compareSync(password,actualPassword)
-        
+          const compare = bcrypt.compareSync(password, actualPassword)
+
           //give password is matching
-          if(compare) {
+          if (compare) {
             req.session.user = result.rows[0].id;
             console.log("now the session is", req.session.user);
             res.send(result.rows[0])
+
           }
 
 
           //given password is not matching
           else {
             console.log("failed to login")
-            res.send({passwordError: "Password does not match"})
+            res.send({ passwordError: "Password does not match" })
           }
 
 
+        }
 
-        
-      }
+      })
 
-    })
 
-    
 
-    
+
 
   })
 

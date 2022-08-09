@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Button,
   Flex,
@@ -12,11 +12,53 @@ import {
   CloseIcon
 } from '@chakra-ui/icons';
 
+
+import axios from 'axios';
+import { LayoutGroupContext } from 'framer-motion';
+
 export const Header = () => {
 
   const [display, changeDisplay] = useState('none');
+  const [loginStatus, setLoginStatus] = useState("");
+  const [username, setUserName] = useState("")
+
+
+  useEffect(() => {
+    axios.get("/users/login").then((response) => {
+      if (response.data.loggedIn == true) {
+        console.log("cookie setup as ",response.data.userID)
+        setLoginStatus(response.data.userID);
+      }
+    });
+  }, []);
+
+
+  useEffect(() => {
+    if(loginStatus) {
+      axios.get(`/users/user_info/${loginStatus}`)
+      .then(res => {
+        setUserName(res.data.display_name)
+      })
+
+    }
+  },[loginStatus])
+
+
+
+  const logout = function() {
+    console.log("logout button clicked!")
+    axios.post("/users/logout").then((response)=> {
+        console.log(`successfully logged out`)
+        setLoginStatus("")
+        setUserName("")
+      
+    })
+  }
+  
+
 
   return (
+
 
     <Flex>
       <Flex
@@ -35,6 +77,11 @@ export const Header = () => {
             Username
           </Highlight>
 
+          {loginStatus && <h1>login userID:{loginStatus} display:{username} </h1>}
+          {loginStatus&& <button onClick={logout}>  logout</button>}
+         
+
+
           <RouterLink to="/">
             <Button
               as="button"
@@ -46,6 +93,7 @@ export const Header = () => {
               Home
             </Button>
           </RouterLink>
+          
 
           <RouterLink to="/join-room">
             <Button

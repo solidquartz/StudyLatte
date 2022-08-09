@@ -54,7 +54,7 @@ export const Login = () => {
 
             }
             else{
-              console.log("response from server", response.data)
+              // console.log("response from server", response.data)
               setError("")
               setlogin(response.data)
 
