@@ -33,15 +33,15 @@ export const Header = () => {
   }, []);
 
 
-  // useEffect(() => {
-  //   if(loginStatus) {
-  //     axios.get(`/users/user_info/${loginStatus}`)
-  //     .then(res => {
-  //       setUserName(res.data.display_name)
-  //     })
+  useEffect(() => {
+    if(loginStatus) {
+      axios.get(`/users/user_info/${loginStatus}`)
+      .then(res => {
+        setUserName(res.data.display_name)
+      })
 
-  //   }
-  // },[loginStatus])
+    }
+  },[loginStatus])
 
 
 
@@ -77,7 +77,7 @@ export const Header = () => {
             Username
           </Highlight>
 
-          {loginStatus && <h1>login userID:{loginStatus} </h1>}
+          {loginStatus && <h1>login userID:{loginStatus} display:{username} </h1>}
           {loginStatus&& <button onClick={logout}>  logout</button>}
          
 
