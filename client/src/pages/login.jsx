@@ -8,7 +8,7 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import TextField from './textField';
+import TextField from '../helpers/textField';
 
 //using chakra with formik: https://chakra-ui.com/getting-started/with-formik
 //formik docs: https://formik.org/docs/tutorial
