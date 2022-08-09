@@ -74,11 +74,11 @@ module.exports = (db) => {
     console.log("you are in GET users/logout")
     if (!req.session.user) {
       res.send({ error: "Not in login status" })
+
     } else {
       res.send({ loggedIn: false })
-      
-      req.session.userID = null;
-      console.log("checkout session after logout",req.session.userID);
+      req.session.destroy();
+      // console.log("checkout session after logout",req.session.user);
     }
 
   })

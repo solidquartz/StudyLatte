@@ -32,28 +32,22 @@ export const Header = () => {
     });
   }, []);
 
-  // if(loginStatus) {
-  //   axios.get(`/user_info/${loginStatus}`)
-  //   .then(res => {
-  //     setUserName(res.data.display_name)
-  //   })
-  // }
-  useEffect(() => {
-    if(loginStatus) {
-      axios.get(`/users/user_info/${loginStatus}`)
-      .then(res => {
-        setUserName(res.data.display_name)
-      })
 
-    }
-  },[loginStatus])
+  // useEffect(() => {
+  //   if(loginStatus) {
+  //     axios.get(`/users/user_info/${loginStatus}`)
+  //     .then(res => {
+  //       setUserName(res.data.display_name)
+  //     })
+
+  //   }
+  // },[loginStatus])
 
 
 
   const logout = function() {
     console.log("logout button clicked!")
     axios.post("/users/logout").then((response)=> {
-      
         console.log(`successfully logged out`)
         setLoginStatus("")
         setUserName("")
@@ -83,7 +77,7 @@ export const Header = () => {
             Username
           </Highlight>
 
-          {loginStatus && <h1>login userID:{loginStatus} display_name:{username}</h1>}
+          {loginStatus && <h1>login userID:{loginStatus} </h1>}
           {loginStatus&& <button onClick={logout}>  logout</button>}
          
 
