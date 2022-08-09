@@ -8,7 +8,7 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import TextField from './components/TextField';
+import TextField from '../components/TextField';
 import { useState } from 'react';
 import axios from 'axios';
 

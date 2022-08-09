@@ -6,18 +6,6 @@ const app = require('../app');
 const saltRounds = 10;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = (db) => {
   // all routes will go here 
   // `INSERT INTO users (name, display_name, email, password) VALUES($1,$2,$3,$4);`,
