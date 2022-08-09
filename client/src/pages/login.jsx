@@ -8,7 +8,9 @@ import {
   Heading
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import TextField from '../components/TextField';
+import TextField from './components/TextField';
+import { useState } from 'react';
+import axios from 'axios';
 
 //using chakra with formik: https://chakra-ui.com/getting-started/with-formik
 //formik docs: https://formik.org/docs/tutorial
@@ -16,6 +18,8 @@ import TextField from '../components/TextField';
 
 //component:  
 export const Login = () => {
+  const [login,setLogin] = useState("")
+  const [error,setError] = useState("")
 
   return (
     <main>
@@ -32,8 +36,32 @@ export const Login = () => {
             .required("Password required")
         })}
         onSubmit={(values, actions) => {
-          alert(JSON.stringify(values, null, 2));
-          actions.resetForm();
+          axios.post("/users/login", {
+            password: values.password,
+            email: values.email,
+
+          }).then((response) => {
+            if (response.data.emailError) {
+              setLogin("")
+              setError(response.data.emailError)
+              
+            }
+
+            else if(response.data.passwordError){
+              setError("")
+              setLogin("")
+              setError(response.data.passwordError)
+
+            }
+            else{
+              // console.log("response from server", response.data)
+              setError("")
+              setLogin(response.data)
+
+            }
+           
+          });
+  
         }}
       >
 
@@ -74,6 +102,9 @@ export const Login = () => {
                 <Button type="submit" colorScheme="purple" width="full">
                   Log In
                 </Button>
+
+                <h3>{error}</h3>
+                {login && <h3>Now you are login as {login.display_name}</h3>} 
 
               </VStack>
             </Box>
