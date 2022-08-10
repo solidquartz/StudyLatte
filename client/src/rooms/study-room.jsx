@@ -14,13 +14,12 @@ import {
   Button,
   Flex,
   VStack,
-  Heading
+  Heading,
+  Grid,
+  GridItem
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
-
-
-
 const socket = io.connect("/");
 
 export const StudyRoom = () => {
@@ -36,11 +35,12 @@ export const StudyRoom = () => {
     }
   };
 
-  //need to get the join room formik form to replace the join chat room form
-  return (
-    <main>
-      <Heading>Study Room</Heading>
 
+  return (
+
+    <main>
+      
+      {/* <div className="join-room-form">
       <Formik
         initialValues={{
           id: "",
@@ -57,7 +57,6 @@ export const StudyRoom = () => {
           actions.resetForm();
         }}
       >
-
         {formik => (
           <Flex
             bg="white.100"
@@ -100,31 +99,48 @@ export const StudyRoom = () => {
             </Box>
           </Flex>
         )}
-      </Formik>
+        </Formik>
+    </div> */}
 
-      <div className="users-component">
+      <Grid
+        templateAreas={`"header header header"
+                  "users timer chat"
+                  "users timer sound"
+                  "users timer notes"`}
+        gridTemplateRows={'50px 1fr 30px'}
+        gridTemplateColumns={'150px 1fr'}
+        h='200px'
+        gap='1'
+        color='blackAlpha.700'
+        fontWeight='bold'>
+
+        <GridItem pl="2" bg="orange.100" className="study-header" area={"header"}>
+          <Heading>Welcome to Aky's Study Room</Heading>
+        </GridItem>
+
+        <GridItem pl='2' bg="red.100" className="users-component" area={"users"}>
         <Users username={username} />
-      </div>
+      </GridItem>
 
-      <div className="timer-component">
+        <GridItem pl='2' bg="blue.100" className="timer-component" area={"timer"}>
         <Timer />
-      </div>
+      </GridItem>
 
-      <div className="notes-component">
+        <GridItem pl='2' bg="green.100" className="notes-component" area={"notes"}>
         <Notes />
-      </div>
+      </GridItem>
 
-      <div className="sound-component">
+        <GridItem pl='2' bg="purple.100" className="sound-component" area={"sound"}>
         <Sound />
-      </div>
+      </GridItem>
 
-      <div>
+        <GridItem pl='2' bg="yellow.100" className="chat-component" area={"chat"}>
         <Chat socket={socket} username={username} room={room} />
-      </div>
+      </GridItem>
 
-
+      </Grid>
       {/* move this logic to the Formik Join Room form */}
-      <div className="StudyChat">
+      {/* <div className="StudyChat">
         {!showChat ? (
           <div className="joinChatContainer">
             <h3>Join Chat</h3>
@@ -150,7 +166,7 @@ export const StudyRoom = () => {
             <Chat socket={socket} username={username} room={room} /> 
             
         )}
-      </div>
+      </div> */}
 
     </main>
 
