@@ -10,13 +10,8 @@ import {
 import '../styles/app.scss';
 import { Formik } from "formik";
 import {
-  Box,
-  Button,
-  Flex,
-  VStack,
   Heading,
-  Grid,
-  GridItem
+  Button
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
@@ -30,7 +25,7 @@ export const StudyRoom = () => {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join_room", room); 
+      socket.emit("join_room", room);
       setShowChat(true);
     }
   };
@@ -38,8 +33,8 @@ export const StudyRoom = () => {
 
   return (
 
-    <main>
-      
+    <main className="study-main">
+
       {/* <div className="join-room-form">
       <Formik
         initialValues={{
@@ -102,43 +97,53 @@ export const StudyRoom = () => {
         </Formik>
     </div> */}
 
-      <Grid
-        templateAreas={`"header header header"
-                  "users timer chat"
-                  "users timer sound"
-                  "users timer notes"`}
-        gridTemplateRows={'50px 1fr 30px'}
-        gridTemplateColumns={'150px 1fr'}
-        h='200px'
-        gap='1'
-        color='blackAlpha.700'
-        fontWeight='bold'>
 
-        <GridItem pl="2" bg="orange.100" className="study-header" area={"header"}>
-          <Heading>Welcome to Aky's Study Room</Heading>
-        </GridItem>
+      <div className="study-dashboard">
 
-        <GridItem pl='2' bg="red.100" className="users-component" area={"users"}>
-        <Users username={username} />
-      </GridItem>
+        <div className="study-header">
+          <div>
+            <Heading>Welcome to Aky's Study Room</Heading>
+          </div>
+          <div>
+            <Button type="button">
+              Leave Room
+            </Button>
+          </div>
+        </div>
 
-        <GridItem pl='2' bg="blue.100" className="timer-component" area={"timer"}>
-        <Timer />
-      </GridItem>
+        <div className="study-components">
+          <div className="left-study-bar">
+            <div><Heading size="md">Study Buddies</Heading></div>
+            <div className="users-component">
+              <Users username={username} />
+            </div>
+          </div>
 
-        <GridItem pl='2' bg="green.100" className="notes-component" area={"notes"}>
-        <Notes />
-      </GridItem>
+          <div className="centre-study-box">
+            <div className="timer-component">
+              <Timer />
+            </div>
+          </div>
 
-        <GridItem pl='2' bg="purple.100" className="sound-component" area={"sound"}>
-        <Sound />
-      </GridItem>
+          <div className="right-study-bar">
+          <div className="notes-component">
+            <Notes />
+          </div>
 
-        <GridItem pl='2' bg="yellow.100" className="chat-component" area={"chat"}>
-        <Chat socket={socket} username={username} room={room} />
-      </GridItem>
+          <div className="sound-component">
+            <Sound />
+          </div>
 
-      </Grid>
+          <div className="chat-component">
+            <Chat socket={socket} username={username} room={room} />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
       {/* move this logic to the Formik Join Room form */}
       {/* <div className="StudyChat">
         {!showChat ? (
