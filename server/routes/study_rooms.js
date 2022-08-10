@@ -24,7 +24,7 @@ module.exports = (db) => {
       }
 
       else {
-       const room_info = {id: rooms[0].id, title: rooms[0].title, topic: rooms[0].sound, max_capacitry: rooms[0].max_capacitry, isPrivate: rooms[0].isPrivate}
+       const room_info = {id: rooms[0].id, title: rooms[0].title, topic: rooms[0].sound,entered_users: rooms[0].entered_users, max_capacitry: rooms[0].max_capacitry, isPrivate: rooms[0].isPrivate}
        res.send(room_info);
       }
 
@@ -53,15 +53,29 @@ module.exports = (db) => {
 
   })
 
-  router.get(`/:room_id/enter/:user_id`,(req,res) => {
-    console.log("you are in room")
-    const command = `UPDATE study_rooms SET entered_users = array_append(entered_users,$1) WHERE id = $2 RETURNING*`;
+  router.get(`/:room_id/enter/:display_name`,(req,res) => {
+    
+    const command = `UPDATE study_rooms SET entered_users = array_append(entered_users,$1) WHERE id = $2 RETURNING *;`;
     const room_id = req.params.room_id;
-    const user_id = req.params.user_id
+    const user_id = req.params.display_name
 
     db.query(command,[user_id,room_id])
     .then(result => {
-        res.send(result.rows)
+        res.send(result.rows[0].entered_users)
+
+    })
+
+  })
+
+  router.get(`/:room_id/leave/:display_name`,(req,res) => {
+  
+    const command = `UPDATE study_rooms SET entered_users = array_remove(entered_users,$1) WHERE id = $2 RETURNING *;`;
+    const room_id = req.params.room_id;
+    const user_id = req.params.display_name
+
+    db.query(command,[user_id,room_id])
+    .then(result => {
+        res.send(result.rows[0].entered_users)
 
     })
 

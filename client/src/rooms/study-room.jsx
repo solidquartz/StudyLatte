@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Chat,
   Users,
@@ -22,6 +22,7 @@ import axios from 'axios';
 
 
 
+
 const socket = io.connect("/");
 
 export const StudyRoom = () => {
@@ -31,14 +32,44 @@ export const StudyRoom = () => {
   const [showChat, setShowChat] = useState(false);
   const [error, setError] = useState("");
   const [joinStatus, setJoinStatus] = useState("");
-
+  const [usersList, setUsersLists] = useState(["initial"])
 
   const joinRoom = () => {
+    console.log("joinRoom is working")
     if (username !== "" && room !== "") {
-      socket.emit("join_room", room); 
-      setShowChat(true);
+      let data = { user: username, room_id: room }
+      socket.emit("join_room", data);
+      // setShowChat(true);
+      axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
+        console.log(res.data)
+        setUsersLists(res.data)
+      })
     }
   };
+
+
+    socket.on("update_usersList", (data) => {
+      const room_id = data.room_id
+      axios.get(`study_rooms/entered_users/${room_id}`)
+        .then(res => setUsersLists(res.data))
+    })
+
+  console.log("users List", usersList)
+  let users = ''
+  for (let user of usersList) {
+    users += user
+    users += ", "
+  }
+
+  // const users = usersList.map(user => {
+  //   return (<Users username = {user}/>)
+  // })
+
+
+
+
+
+
 
   //need to get the join room formik form to replace the join chat room form
   return (
@@ -54,11 +85,14 @@ export const StudyRoom = () => {
           id: Yup.number()
             .required("Room ID Required"),
           username: Yup.string()
-          .required("Username Required")
+            .required("Username Required")
         })}
         onSubmit={(values, actions) => {
-          alert(JSON.stringify(values, null, 2));
+          // alert(JSON.stringify(values, null, 2));
+          setUsername(values.username)
+          setRoom(values.id)
           actions.resetForm();
+          joinRoom();
         }}
       >
 
@@ -88,6 +122,7 @@ export const StudyRoom = () => {
                   name="id"
                   type="number"
                   placeholder="Room ID"
+
                 />
 
                 <TextField
@@ -105,6 +140,12 @@ export const StudyRoom = () => {
           </Flex>
         )}
       </Formik>
+      <div>
+        {/* {usersList} */}
+        <h1>enetered users</h1>
+        {users}
+
+      </div>
 
       <div className="users-component">
         <Users username={username} />
@@ -150,9 +191,9 @@ export const StudyRoom = () => {
           </div>
         ) : (
 
-            //Keep this part 
-            <Chat socket={socket} username={username} room={room} /> 
-            
+          //Keep this part 
+          <Chat socket={socket} username={username} room={room} />
+
         )}
       </div>
 

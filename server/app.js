@@ -23,12 +23,19 @@ const io = new Server(server, {
 //socket = events for user who connected
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
+  
 
   //join a room
   socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`user with ID: ${socket.id} joined room: ${data}`)
+    socket.join(data.room_id);
+    console.log(`user with ID: ${data.user} joined room: ${data.room_id}`)
+    socket.to(data.room_id).emit("update_usersList", data);
+  
   })
+
+
+
+
 
   //send message data to client to a SPECIFIC room (socket.to(room(id))
   socket.on("send_message", (data) => {
@@ -39,7 +46,16 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
   })
+
+
+
 })
+
+
+
+
+
+
 
 server.listen(9000, () => {
   console.log("SERVER RUNNING");
