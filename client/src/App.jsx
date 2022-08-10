@@ -7,7 +7,6 @@ import {
   Test,
   Login,
   EditAccount,
-  JoinRoom,
   CreateRoom
 } from './pages';
 import {
@@ -26,7 +25,6 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/edit-account" element={<EditAccount />} />
-        <Route path="/join-room" element={<JoinRoom />} />
         <Route path="/create-room" element={<CreateRoom />} />
         <Route path="/study-room" element={<StudyRoom />} />
         <Route path="/test" element={<Test />} />

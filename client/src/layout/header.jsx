@@ -13,7 +13,6 @@ import {
 
 
 import axios from 'axios';
-import { LayoutGroupContext } from 'framer-motion';
 
 export const Header = () => {
 
@@ -94,7 +93,7 @@ export const Header = () => {
           </RouterLink>
           
 
-          <RouterLink to="/join-room">
+          <RouterLink to="/study-room">
             <Button
               as="button"
               variant="ghost"
