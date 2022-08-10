@@ -19,6 +19,8 @@ import {
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
 
+
+
 const socket = io.connect("/");
 
 export const StudyRoom = () => {
@@ -42,12 +44,13 @@ export const StudyRoom = () => {
       <Formik
         initialValues={{
           id: "",
-          password: "",
+          username: "",
         }}
         validationSchema={Yup.object({
           id: Yup.number()
             .required("Room ID Required"),
-          password: Yup.string()
+          username: Yup.string()
+          .required("Username Required")
         })}
         onSubmit={(values, actions) => {
           alert(JSON.stringify(values, null, 2));
@@ -84,9 +87,9 @@ export const StudyRoom = () => {
                 />
 
                 <TextField
-                  name="password"
-                  type="password"
-                  placeholder="Room Password"
+                  name="username"
+                  type="username"
+                  placeholder="Username"
                 />
 
                 <Button type="submit" colorScheme="purple" width="full">
@@ -100,7 +103,7 @@ export const StudyRoom = () => {
       </Formik>
 
       <div className="users-component">
-        <Users />
+        <Users username={username} />
       </div>
 
       <div className="timer-component">
@@ -115,6 +118,12 @@ export const StudyRoom = () => {
         <Sound />
       </div>
 
+      <div>
+        <Chat socket={socket} username={username} room={room} />
+      </div>
+
+
+      {/* move this logic to the Formik Join Room form */}
       <div className="StudyChat">
         {!showChat ? (
           <div className="joinChatContainer">
@@ -136,8 +145,9 @@ export const StudyRoom = () => {
             <button onClick={joinRoom}>Join a Room</button>
           </div>
         ) : (
-            
-            <Chat socket={socket} username={username} room={room} />
+
+            //Keep this part 
+            <Chat socket={socket} username={username} room={room} /> 
             
         )}
       </div>

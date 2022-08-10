@@ -1,4 +1,7 @@
-import { Heading } from "@chakra-ui/react";
+import {
+  Heading,
+  Button
+} from "@chakra-ui/react";
 
 
 
@@ -8,6 +11,7 @@ export const Timer = () => {
     <>
       <Heading size="lg">Study!</Heading>
       <p>23:02</p>
+      <Button>Start Timer!!</Button>
     </>
   );
 
