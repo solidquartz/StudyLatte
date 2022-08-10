@@ -13,7 +13,6 @@ import {
 
 
 import axios from 'axios';
-import { LayoutGroupContext } from 'framer-motion';
 
 export const Header = () => {
 
@@ -24,7 +23,7 @@ export const Header = () => {
 
   useEffect(() => {
     axios.get("/users/login").then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         console.log("cookie setup as ",response.data.userID)
         setLoginStatus(response.data.userID);
       }
@@ -77,7 +76,7 @@ export const Header = () => {
           </Highlight>
 
           {loginStatus && <h1>login userID:{loginStatus} display:{username} </h1>}
-          {loginStatus&& <button onClick={logout}>  logout</button>}
+          {loginStatus && <Button type="submit" onClick={logout}>  logout</Button>}
          
 
 
@@ -94,7 +93,7 @@ export const Header = () => {
           </RouterLink>
           
 
-          <RouterLink to="/join-room">
+          <RouterLink to="/study-room">
             <Button
               as="button"
               variant="ghost"

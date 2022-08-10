@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import TextField from '../components/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import TextAreaField from '../components/TextAreaField';
+import '../styles/app.scss';
 
 
 export const CreateRoom = () => {

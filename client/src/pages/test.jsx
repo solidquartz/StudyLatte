@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Button, Heading } from '@chakra-ui/react';
+import '../styles/app.scss';
 
 export const Test = () => {
 
