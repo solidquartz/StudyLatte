@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 module.exports = (db) => {
   // all routes will go here 
   router.get('/', (req, res) => {
@@ -8,6 +7,72 @@ module.exports = (db) => {
       res.json(data.rows);
     });
   });
+
+
+
+  // return room_info
+  router.get(`/room_info/:room_id`,(req,res) => {
+    const command = `SELECT * from study_rooms WHERE id = $1`;
+    const room_id = req.params.room_id;
+
+    db.query(command,[room_id])
+    .then(result => {
+      const rooms = result.rows
+
+      if(rooms.length === 0) {
+        res.send({error : "no such room exists"})
+      }
+
+      else {
+       const room_info = {id: rooms[0].id, title: rooms[0].title, topic: rooms[0].sound, max_capacitry: rooms[0].max_capacitry, isPrivate: rooms[0].isPrivate}
+       res.send(room_info);
+      }
+
+    })
+
+  })
+
+  router.get(`/entered_users/:room_id`,(req,res) => {
+    const command = `SELECT * from study_rooms WHERE id = $1`;
+    const room_id = req.params.room_id;
+
+    db.query(command,[room_id])
+    .then(result => {
+      const rooms = result.rows
+
+      if(rooms.length === 0) {
+        res.send({error : "no such room exists"})
+      }
+
+      else {
+       const room_info = rooms[0].entered_users
+       res.send(room_info);
+      }
+
+    })
+
+  })
+
+  router.get(`/:room_id/enter/:user_id`,(req,res) => {
+    console.log("you are in room")
+    const command = `UPDATE study_rooms SET entered_users = array_append(entered_users,$1) WHERE id = $2 RETURNING*`;
+    const room_id = req.params.room_id;
+    const user_id = req.params.user_id
+
+    db.query(command,[user_id,room_id])
+    .then(result => {
+        res.send(result.rows)
+
+    })
+
+  })
+
+
+
+
+
+
+
 
   return router;
 };

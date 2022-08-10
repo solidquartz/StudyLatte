@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
+import axios from 'axios';
 
 
 
@@ -28,6 +29,9 @@ export const StudyRoom = () => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const [error, setError] = useState("");
+  const [joinStatus, setJoinStatus] = useState("");
+
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
