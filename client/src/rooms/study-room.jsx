@@ -21,10 +21,12 @@ export const StudyRoom = () => {
   
 
   // for now we are using study_room.id but later we should change this to study_room.url 
+  // join room if data=room_id exists we can join a room 
+  // because socket.emit("join_rooms", room) does if room_id does not exists then creates new room
+
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      // join room if data=room_id exists and if room_id is not exists then creates new one 
-
+     
       // first check with database if give room url exists or not if the room_id
       axios.get(`/study_rooms/room_info/${room}`)
       .then(res => {
@@ -67,9 +69,6 @@ export const StudyRoom = () => {
       {joinStatus && <h1>{joinStatus}</h1>}
 
       <Chats socket = {socket} username = {username} room = {room}/>
-
-
-
 
     </main>
 
