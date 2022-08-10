@@ -32,7 +32,7 @@ export const StudyRoom = () => {
   const [showChat, setShowChat] = useState(false);
   const [error, setError] = useState("");
   const [joinStatus, setJoinStatus] = useState("");
-  const [usersList, setUsersLists] = useState(["initial"])
+  const [usersList, setUsersLists] = useState([])
 
   const joinRoom = () => {
     console.log("joinRoom is working")
@@ -41,29 +41,33 @@ export const StudyRoom = () => {
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        console.log(res.data)
         setUsersLists(res.data)
       })
     }
   };
 
 
-    socket.on("update_usersList", (data) => {
-      const room_id = data.room_id
-      axios.get(`study_rooms/entered_users/${room_id}`)
-        .then(res => setUsersLists(res.data))
-    })
+  socket.on("update_usersList", (data) => {
+    const room_id = data.room_id
+    axios.get(`study_rooms/entered_users/${room_id}`)
+      .then(res => setUsersLists(res.data))
+  })
 
-  console.log("users List", usersList)
-  let users = ''
-  for (let user of usersList) {
-    users += user
-    users += ", "
-  }
+
+  // console.log("users List", usersList)
+  // let users = ''
+  // for (let user of usersList) {
+  //   users += user
+  //   users += ", "
+  // }
 
   // const users = usersList.map(user => {
   //   return (<Users username = {user}/>)
   // })
+
+  const users = usersList.map(user => {
+    return (<Users username = {user}/>)
+  })
 
 
 
@@ -195,6 +199,12 @@ export const StudyRoom = () => {
           <Chat socket={socket} username={username} room={room} />
 
         )}
+      </div>
+      <div>
+
+        <h1>enetered users</h1>
+        {users}
+
       </div>
 
     </main>
