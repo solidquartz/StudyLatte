@@ -21,6 +21,7 @@ const io = new Server(server, {
   }
 });
 //socket = events for user who connected
+// initial connection 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 

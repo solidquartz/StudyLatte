@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS study_rooms CASCADE;
 -- CREATE uuid
 -- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- url with short version
--- url random generator : url VARCHAR(255) DEFAULT substring(md5(random()::text),1,7)
+-- url random generator : url VARCHAR(255) DEFAULT substring(md5(random()::text),1,8)
 -- url with longer version
 -- url uuid DEFAULT uuid_generate_v4 ()   
 
