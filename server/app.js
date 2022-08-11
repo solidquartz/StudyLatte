@@ -26,8 +26,9 @@ io.on("connection", (socket) => {
 
   //join a room
   socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`user with ID: ${socket.id} joined room: ${data}`)
+    socket.join(data.room_id);
+    console.log(`user with ID: ${data.user} joined room: ${data.room_id}`)
+    socket.to(data.room_id).emit("update_usersList", data);
   })
 
   //send message data to client to a SPECIFIC room (socket.to(room(id))
