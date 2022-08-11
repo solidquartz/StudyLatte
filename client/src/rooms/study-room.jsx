@@ -75,9 +75,7 @@ export const StudyRoom = (props) => {
               <Chat socket={socket} username={username} room={room} />
             </div>
 
-            <div className="notes-component">
-              <Notes />
-            </div>
+
             <div className="sound-component">
               <Sound />
             </div>
