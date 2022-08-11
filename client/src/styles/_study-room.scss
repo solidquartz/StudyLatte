@@ -1,0 +1,25 @@
+.study-dashboard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.study-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.study-components {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-study-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-study-bar {
+  display: flex;
+  flex-direction: column;
+}

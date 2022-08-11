@@ -8,14 +8,15 @@ import {
   Sound
 } from "./index";
 import '../styles/app.scss';
-import { Formik } from "formik";
+// import { Formik } from "formik";
 import {
   Heading,
   Button
 } from "@chakra-ui/react";
-import * as Yup from 'yup';
-import TextField from '../components/TextField';
+// import * as Yup from 'yup';
+// import TextField from '../components/TextField';
 const socket = io.connect("/");
+
 
 export const StudyRoom = () => {
 
@@ -33,7 +34,7 @@ export const StudyRoom = () => {
 
   return (
 
-    <main className="study-main">
+    <main>
 
       {/* <div className="join-room-form">
       <Formik
@@ -126,16 +127,16 @@ export const StudyRoom = () => {
           </div>
 
           <div className="right-study-bar">
-          <div className="notes-component">
-            <Notes />
-          </div>
+            <div className="notes-component">
+              <Notes />
+            </div>
 
-          <div className="sound-component">
-            <Sound />
-          </div>
+            <div className="sound-component">
+              <Sound />
+            </div>
 
-          <div className="chat-component">
-            <Chat socket={socket} username={username} room={room} />
+            <div className="chat-component">
+              <Chat socket={socket} username={username} room={room} />
             </div>
           </div>
 
