@@ -94,7 +94,7 @@ export const Header = () => {
           </RouterLink>
           
 
-          <RouterLink to="/study-room">
+          <RouterLink to="/join-room">
             <Button
               as="button"
               variant="ghost"
