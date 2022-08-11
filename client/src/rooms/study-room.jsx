@@ -8,21 +8,17 @@ import {
   Sound
 } from "./index";
 import '../styles/app.scss';
-import { Formik } from "formik";
+// import { Formik } from "formik";
 import {
-  Box,
-  Button,
-  Flex,
-  VStack,
-  Heading
+  Heading,
+  Button
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
 import axios from 'axios';
 
-
-
 const socket = io.connect("/");
+
 
 export const StudyRoom = () => {
 
@@ -35,16 +31,17 @@ export const StudyRoom = () => {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("join_room", room); 
+      socket.emit("join_room", room);
       setShowChat(true);
     }
   };
 
-  //need to get the join room formik form to replace the join chat room form
-  return (
-    <main>
-      <Heading>Study Room</Heading>
 
+  return (
+
+    <main className='study-main'>
+
+      {/* <div className="join-room-form">
       <Formik
         initialValues={{
           id: "",
@@ -61,7 +58,6 @@ export const StudyRoom = () => {
           actions.resetForm();
         }}
       >
-
         {formik => (
           <Flex
             bg="white.100"
@@ -104,31 +100,56 @@ export const StudyRoom = () => {
             </Box>
           </Flex>
         )}
-      </Formik>
+        </Formik>
+    </div> */}
 
-      <div className="users-component">
-        <Users username={username} />
-      </div>
 
-      <div className="timer-component">
-        <Timer />
-      </div>
+      <div className="study-dashboard">
 
-      <div className="notes-component">
-        <Notes />
-      </div>
+        <div className="study-header">
+          <div>
+            <Heading>Welcome to Aky's Study Room</Heading>
+          </div>
+          <div>
+            <Button type="button">
+              Leave Room
+            </Button>
+          </div>
+        </div>
 
-      <div className="sound-component">
-        <Sound />
-      </div>
+        <div className="study-components">
+          <div className="left-study-bar">
+            <div className="users-component">
+              <Users username={username} />
+            </div>
+          </div>
 
-      <div>
-        <Chat socket={socket} username={username} room={room} />
+          <div className="centre-study-box">
+            <div className="timer-component">
+              <Timer />
+            </div>
+          </div>
+
+          <div className="right-study-bar">
+            <div className="chat-component">
+              <Chat socket={socket} username={username} room={room} />
+            </div>
+
+            <div className="notes-component">
+              <Notes />
+            </div>
+            <div className="sound-component">
+              <Sound />
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
 
       {/* move this logic to the Formik Join Room form */}
-      <div className="StudyChat">
+      {/* <div className="StudyChat">
         {!showChat ? (
           <div className="joinChatContainer">
             <h3>Join Chat</h3>
@@ -154,7 +175,7 @@ export const StudyRoom = () => {
             <Chat socket={socket} username={username} room={room} /> 
             
         )}
-      </div>
+      </div> */}
 
     </main>
 
