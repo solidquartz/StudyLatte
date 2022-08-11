@@ -3,7 +3,6 @@ import { useState } from 'react';
 import {
   Chat,
   Users,
-  Timer,
   Notes,
   Sound
 } from "./index";
@@ -110,9 +109,9 @@ export const StudyRoom = () => {
         <Users username={username} />
       </div>
 
-      <div className="timer-component">
+      {/* <div className="timer-component">
         <Timer />
-      </div>
+      </div> */}
 
       <div className="notes-component">
         <Notes />

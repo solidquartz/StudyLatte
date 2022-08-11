@@ -3,6 +3,7 @@ import '../styles/app.scss';
 import { useEffect, useState } from 'react';
 import '../styles/app.scss';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import Countdown from './timer';
 
 
 export const Chat = ({ socket, username, room }) => {
@@ -21,6 +22,7 @@ export const Chat = ({ socket, username, room }) => {
         time: new Date(Date.now()).getHours() +
           ":" + new Date(Date.now()).getMinutes(),
       };
+
       //handing state
       await socket.emit("send_message", messageData);
       setMessageList((chatHistory) => [...chatHistory, messageData]);
@@ -30,7 +32,10 @@ export const Chat = ({ socket, username, room }) => {
 
   //receive data (message) from the server
   useEffect(() => {
-    socket.on("receive_message", (data) => {
+      socket.on("receive_message", (data) => {
+        if (data.message.startsWith(`$$$_###:`)) {
+          return;
+        }
       //adds messages to a stack to create a message history
       setMessageList((chatHistory) => [...chatHistory, data]);
     });
@@ -43,6 +48,13 @@ export const Chat = ({ socket, username, room }) => {
     <div className="chat-window">
       <div className='chat-header'>
         <p> Study chat</p>
+      </div>
+      <div>
+        <Countdown 
+        room = {room}
+        username = {username}
+        socket = {socket} 
+        />
       </div>
 
       <div className='chat-body'>
