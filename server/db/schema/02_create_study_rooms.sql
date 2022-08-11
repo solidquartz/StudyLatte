@@ -33,7 +33,7 @@ CREATE TABLE study_rooms (
   pomodoro BOOLEAN NOT NULL,
 
 
-  entered_users INTEGER[] DEFAULT ARRAY[]::INTEGER[],
+  entered_users TEXT[] DEFAULT ARRAY[]::TEXT[],
   url VARCHAR(255),
   
   created_time TIMESTAMP DEFAULT NOW(),
