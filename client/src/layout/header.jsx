@@ -10,6 +10,7 @@ import {
   HamburgerIcon,
   CloseIcon
 } from '@chakra-ui/icons';
+import '../styles/app.scss';
 
 
 import axios from 'axios';
@@ -58,7 +59,7 @@ export const Header = () => {
   return (
 
 
-    <Flex>
+    <Flex className="nav-header">
       <Flex
         position="fixed"
         top="1rem"
@@ -175,7 +176,8 @@ export const Header = () => {
           onClick={() => changeDisplay("flex")}
           display={["flex", "flex", "none", "none"]}
         />
-      </Flex>
+        </Flex>
+
 
       {/* Mobile View */}
       <Flex

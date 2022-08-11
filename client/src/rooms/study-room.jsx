@@ -34,7 +34,7 @@ export const StudyRoom = () => {
 
   return (
 
-    <main>
+    <main className='study-main'>
 
       {/* <div className="join-room-form">
       <Formik
@@ -114,7 +114,6 @@ export const StudyRoom = () => {
 
         <div className="study-components">
           <div className="left-study-bar">
-            <div><Heading size="md">Study Buddies</Heading></div>
             <div className="users-component">
               <Users username={username} />
             </div>
@@ -127,16 +126,15 @@ export const StudyRoom = () => {
           </div>
 
           <div className="right-study-bar">
+            <div className="chat-component">
+              <Chat socket={socket} username={username} room={room} />
+            </div>
+
             <div className="notes-component">
               <Notes />
             </div>
-
             <div className="sound-component">
               <Sound />
-            </div>
-
-            <div className="chat-component">
-              <Chat socket={socket} username={username} room={room} />
             </div>
           </div>
 

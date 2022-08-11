@@ -6,7 +6,7 @@ export const Sound = () => {
 
   return (
 
-    <Heading>Sound Component!</Heading>
+    <Heading>🔈 🔇</Heading>
 
   );
 

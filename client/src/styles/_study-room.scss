@@ -1,25 +1,73 @@
+// .study-main {
+//   // background: url("../images/kris-atomic-3b2tADGAWnU-unsplash.jpg");
+//   // background-repeat: no-repeat;
+//   // background-size: cover;
+// }
+
 .study-dashboard {
   display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
   flex-direction: column;
   width: 100%;
+  height: 100%;
+  justify-content: space-between;
+
 }
 
 .study-header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .study-components {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: .5rem;
 }
 
 .left-study-bar {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+}
+
+.centre-study-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-self: center;
+}
+
+.timer-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-self: center;
 }
 
 .right-study-bar {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.chat-component {
+  padding-bottom: 1rem;
+}
+
+.sound-component {
+  display: flex;
+  padding-top: 1rem;
+  justify-content: center;
+}
+
+.timer-contents {
+  padding: 2rem;
 }

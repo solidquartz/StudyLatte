@@ -1,7 +1,11 @@
 main {
-  display: flex;
+  width: 100%;
   position: absolute;
-  top: 2rem;
-  width: 95%;
-  margin: 1rem;
+  top: 3rem;
+}
+
+.nav-header {
+  z-index: 1;
+  position: sticky;
+  width: 100%;
 }
