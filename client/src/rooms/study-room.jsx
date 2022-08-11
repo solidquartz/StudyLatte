@@ -16,6 +16,7 @@ import {
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
 import axios from 'axios';
+import Countdown from './timer';
 
 // const socket = io.connect("/");
 
@@ -28,8 +29,8 @@ export const StudyRoom = (props) => {
   const socket = props.socket
   const usersList = props.usersList
   const room = props.room
-   const users = usersList.map(user => {
-    return (<Users username = {user}/>)
+  const users = usersList.map(user => {
+    return (<Users username={user} />)
   })
 
 
@@ -54,20 +55,24 @@ export const StudyRoom = (props) => {
         <div className="study-components">
           <div className="left-study-bar">
             <div className="users-component">
-            <Heading size="sm">Study Buddies</Heading>
+              <Heading size="sm">Study Buddies</Heading>
               {users}
             </div>
           </div>
 
           <div className="centre-study-box">
-            <div className="timer-component">
-              <Timer />
+            <div>
+              <Countdown
+                room={room}
+                username={username}
+                socket={socket}
+              />
             </div>
           </div>
 
           <div className="right-study-bar">
             <div className="chat-component">
-              <Chat  socket={socket} username={username} room={room}  />
+              <Chat socket={socket} username={username} room={room} />
             </div>
 
             <div className="notes-component">
