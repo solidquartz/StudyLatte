@@ -3,7 +3,7 @@ import '../styles/app.scss';
 import { useEffect, useState } from 'react';
 import '../styles/app.scss';
 import ScrollToBottom from 'react-scroll-to-bottom';
-
+import Countdown from './timer';
 
 export const Chat = ({ socket, username, room }) => {
 
@@ -43,6 +43,13 @@ export const Chat = ({ socket, username, room }) => {
     <div className="chat-window">
       <div className='chat-header'>
         <p> Study chat</p>
+      </div>
+      <div>
+        <Countdown 
+        room = {room}
+        username = {username}
+        socket = {socket} 
+        />
       </div>
 
       <div className='chat-body'>

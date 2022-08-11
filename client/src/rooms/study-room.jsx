@@ -41,7 +41,7 @@ export const StudyRoom = () => {
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        setUsersLists(res.data)
+        setUsersLists([...res.data])
       })
     }
   };
@@ -151,13 +151,11 @@ export const StudyRoom = () => {
 
       </div>
 
-      <div className="users-component">
-        <Users username={username} />
-      </div>
+  
 
-      <div className="timer-component">
+      {/* <div className="timer-component">
         <Timer />
-      </div>
+      </div> */}
 
       <div className="notes-component">
         <Notes />

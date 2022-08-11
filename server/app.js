@@ -11,6 +11,7 @@ const app = express();
 const { Server } = require("socket.io");
 const http = require("http");
 const session = require("express-session");
+require('dotenv').config();
 
 //socket.io (pedro's way)
 const server = http.createServer(app);
