@@ -45,7 +45,7 @@ export const StudyRoom = (props) => {
             <Heading>Welcome to Aky's Study Room</Heading>
           </div>
           <div>
-            <Button type="button">
+            <Button type="button" onClick={props.removeUser}>
               Leave Room
             </Button>
           </div>

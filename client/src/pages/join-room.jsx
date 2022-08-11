@@ -44,9 +44,9 @@ export const JoinRoom = () => {
         setUsersLists([...res.data])
         setJoinStatus(true)
       })
-      
+
     }
-    
+
   };
   socket.on("update_usersList", (data) => {
     const room_id = data.room_id
@@ -54,42 +54,62 @@ export const JoinRoom = () => {
       .then(res => setUsersLists(res.data))
   })
 
-  socket.on("removeUser", (data)=> {
+  const removeUser = function () {
+    axios.get(`/study_rooms/${room}/leave/${username}`).then(res => {
+      setUsersLists([...res.data])
+      setJoinStatus(false)
+    })
+  }
 
-    
-  })
+  useEffect(() => {
+    window.addEventListener('beforeunload', alertUser)
+    window.addEventListener('unload', handleTabClosing)
+    return () => {
+        window.removeEventListener('beforeunload', alertUser)
+        window.removeEventListener('unload', handleTabClosing)
+    }
+})
+
+const handleTabClosing = () => {
+    removeUser()
+}
+
+const alertUser = (event) => {
+    event.preventDefault()
+    event.returnValue = 'Are you sure?'
+}
 
   return (
-    
+
     <main >
       {!joinStatus &&
-      <main>
-        <Heading>Join a Room</Heading>
-      
-      <div className="joinChatContainer">
+        <main>
+          <Heading>Join a Room</Heading>
 
-        <input
-          type="text"
-          placeholder="Name"
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Room ID"
-          onChange={(event) => {
-            setRoom(event.target.value);
-          }}
-        />
-        <button onClick={joinRoom}>Join a Room</button>
-      </div>
-      </main>
-       }
+          <div className="joinChatContainer">
 
-       {joinStatus && <StudyRoom socket = {socket} username = {username} usersList ={usersList} room = {room} />}
-      
-      
+            <input
+              type="text"
+              placeholder="Name"
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Room ID"
+              onChange={(event) => {
+                setRoom(event.target.value);
+              }}
+            />
+            <button onClick={joinRoom}>Join a Room</button>
+          </div>
+        </main>
+      }
+
+      {joinStatus && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser = {removeUser}/>}
+
+
 
 
     </main>
