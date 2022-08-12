@@ -37,11 +37,38 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
   })
 
+  socket.on("start-timer",(data) => {
+    let time = data.time
+    const room = data.room
+    countDown(time,room)
+  })
+
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
     
   })
 })
+
+const countDown = function(i,room) {
+ 
+  return promise = new Promise( (resolve, reject) => {
+    i--;
+   
+    const data = {room : room , time : i}
+    io.emit("update-time",data)
+
+
+    if (i > 0) {
+      setTimeout( () => {
+        countDown(i,room).then(resolve);
+      }, 1000);
+    } else {
+      resolve("done!");
+    }
+
+  });
+
+}
 
 
 
