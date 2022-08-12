@@ -1,0 +1,21 @@
+@import "./fonts";
+
+.home-container {
+
+  .home-components {
+
+    .title-header {
+      h1 {
+        font-family: $pacifico;
+        font-size: 6rem;
+        text-align: center;
+      }
+    }
+
+    .enter-container {
+      background: url("../images/cafe-white.jpg");
+      height: 80vh;
+      background-size: cover;
+    }
+  }
+}
