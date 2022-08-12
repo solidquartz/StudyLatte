@@ -28,16 +28,6 @@ export const CreateRoom = () => {
           title: "",
           topic: "",
           description: "",
-          max_capacity: 1,
-          pomodoro: true,
-          study_time: 25,
-          break_time: 5,
-          long_break_time: 30,
-          reps: 2,
-          music: false,
-          isPrivate: false,
-          password: "",
-          background_img: ""
         }}
         validationSchema={Yup.object({
           title: Yup.string()
@@ -46,29 +36,9 @@ export const CreateRoom = () => {
             .required("Please write a descriptive topic"),
           description: Yup.string()
             .required("Please write a description"),
-          max_capacity: Yup.number()
-            .required("Please select an option"),
-          pomodoro: Yup.boolean()
-            .required("Please select an option"),
-          study_time: Yup.number()
-            .required("Please choose a duration"),
-          break_time: Yup.number()
-            .required("Please choose a duration"),
-          long_break_time: Yup.number()
-            .required("Please choose a duration"),
-          reps: Yup.number()
-            .required("Please choose a number of repetitions"),
-          music: Yup.boolean()
-            .required("Please select an option"),
-          isPrivate: Yup.boolean()
-            .required("Please select an option"),
-          password: Yup.string()
-            .required("Please choose a password"),
-          background_image: Yup.string()
-            .required("Please select an option"),
         })}
         onSubmit={(values, actions) => {
-          alert(JSON.stringify(values, null, 13));
+          alert(JSON.stringify(values, null, 3));
           actions.resetForm();
         }}
       >
