@@ -5,17 +5,13 @@ import React from 'react';
 
 //will need to import this into RoomList/join-room wherever we use it
 
-export const RoomListItem = () => {
-
-
-  return (
-
-
-
-    <Box maxW='md' borderWidth='2px' borderRadius='lg' overflow='hidden'>
+export const RoomList = (props) => {
+return (
+  <ul>
+  {props.rooms.map(room => <Box maxW='md' borderWidth='2px' borderRadius='lg' overflow='hidden'>
       <Box p='6'>
         
-        <Box display='flex' alignItems='baseline'>Aky's Coding Mines 💎
+        <Box display='flex' alignItems='baseline'> {room.title}
         </Box>
 
         <Box
@@ -26,7 +22,7 @@ export const RoomListItem = () => {
           textTransform='uppercase'
           ml='2'
         >
-          Ruby
+          {room.name}
         </Box>
 
         <Box
@@ -36,16 +32,17 @@ export const RoomListItem = () => {
           lineHeight='tight'
           noOfLines={3}
         >
-          Here's a description about my study room which you should totally join, it won't hurt a bit.
+          {room.description}
         </Box>
 
         <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-          6 People Studying
+          {room.users}
         </Box>
 
       </Box>
-    </Box>
+    </Box>)}
 
+</ul>
 
   );
 
