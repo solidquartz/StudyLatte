@@ -10,7 +10,7 @@ export const Home = () => {
 
 
   return (
-    <main>
+    <main className="home-bg">
 
       <div className="home-container">
 
@@ -29,12 +29,12 @@ export const Home = () => {
               <div className="username-button">
               </div>
             </div>
-            
+
           </div>
 
           <div className="about-container">
             <div className="about-header">
-
+              <h2>Welcome</h2>
             </div>
 
             <div className="about-description">

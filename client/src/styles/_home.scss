@@ -1,5 +1,10 @@
 @import "./fonts";
 
+.home-bg {
+  background: url("../images/purty-wood.png");
+  height: 100vh;
+}
+
 .home-container {
 
   .home-components {
@@ -14,8 +19,17 @@
 
     .enter-container {
       background: url("../images/cafe-white.jpg");
-      height: 80vh;
+      height: 70vh;
       background-size: cover;
+    }
+
+    .about-container {
+
+      .about-header {
+        font-family: $pacifico;
+        font-size: 4rem;
+        text-align: center;
+      }
     }
   }
 }
