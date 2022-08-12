@@ -82,7 +82,7 @@ module.exports = (db) => {
 
   })
 
-  router.get(`/add_new_room`,(req,res) => {
+  router.post(`/add_new_room`,(req,res) => {
   
     const command = `INSERT INTO study_rooms (title, description, topic) Values ($1, $2, $3) returning *;` ;
     const title = req.body.title;
