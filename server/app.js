@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -37,13 +38,41 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
   })
 
+
+  socket.on("start-timer",(data) => {
+    let time = data.time
+    const room = data.room
+    timerTrack[room] = time
+    const timer = setInterval(() => {
+      time -= 1 ;
+      if (time === 0) {
+        clearInterval(timer);
+      }
+      socket.to(room).emit("update-time",time)
+    }, 1000);
+  })
+
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
     
   })
 })
 
+// function countDown(time,room) {
+//   return promise = new Promise((resolve, reject) => {
+//     time --;
+//     if(time > 0) {
+//       setTimeout( ()=> {
+//         countDown(time).then(resolve);
 
+//       },1000);
+//     } else {
+//       resolve("Done")
+//     }
+//   })
+// }
+
+// const timerTrack = {}
 
 server.listen(9000, () => {
   console.log("SERVER RUNNING");

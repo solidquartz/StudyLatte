@@ -22,6 +22,9 @@ import Countdown from './timer';
 
 
 export const StudyRoom = (props) => {
+  
+  
+
 
 
 
@@ -29,6 +32,21 @@ export const StudyRoom = (props) => {
   const socket = props.socket
   const usersList = props.usersList
   const room = props.room
+
+
+ 
+  const [time , setTime] = useState(0)
+
+  const startTimer = function () {
+    const data = {room: room, time : 60}
+    socket.emit("start-timer", data)
+  
+  }
+
+  socket.on("update-time", (time) => {
+    setTime(time)
+  })
+
   const users = usersList.map(user => {
     return (<Users username={user} />)
   })
@@ -66,6 +84,8 @@ export const StudyRoom = (props) => {
                 room={room}
                 username={username}
                 socket={socket}
+                time = {time}
+                onClick = {startTimer}
               />
             </div>
           </div>
