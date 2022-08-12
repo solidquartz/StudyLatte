@@ -8,7 +8,7 @@ export const RoomListItem = (props) => {
   <Box maxW='md' borderWidth='2px' borderRadius='lg' overflow='hidden'>
       <Box p='6'>
         
-        <Box display='flex' alignItems='baseline'> {props.id}
+        <Box display='flex' alignItems='baseline'> {props.title}
         </Box>
 
         <Box
@@ -19,7 +19,7 @@ export const RoomListItem = (props) => {
           textTransform='uppercase'
           ml='2'
         >
-          {props.title}
+          {props.topic}
         </Box>
 
         <Box
@@ -29,11 +29,11 @@ export const RoomListItem = (props) => {
           lineHeight='tight'
           noOfLines={3}
         >
-          {props.topic}
+          {props.description}
         </Box>
 
         <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-          {props.entered_users}
+          {props.entered_users.length}
         </Box>
 
       </Box>

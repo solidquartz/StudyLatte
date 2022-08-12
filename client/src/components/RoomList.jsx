@@ -16,17 +16,7 @@ export const RoomList = (props) => {
       
     });
 
-
-
 },[])
-
-
-
-
-
-
-
-
 return (
 
   <ul>
