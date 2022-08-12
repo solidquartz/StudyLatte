@@ -82,6 +82,21 @@ module.exports = (db) => {
 
   })
 
+  router.get(`/add_new_room`,(req,res) => {
+  
+    const command = `INSERT INTO study_rooms (title, description, topic) Values ($1, $2, $3) returning *;` ;
+    const title = req.body.title;
+    const description = req.body.description;
+    const topic = req.body.topic;
+
+    db.query(command,[title, description, topic])
+    .then(result => {
+        res.send(result.rows[0].entered_users)
+
+    })
+
+  })
+
 
 
 
