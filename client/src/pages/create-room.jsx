@@ -13,9 +13,12 @@ import TextField from '../components/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import TextAreaField from '../components/TextAreaField';
 import '../styles/app.scss';
+import axios from 'axios';
 
 
 export const CreateRoom = () => {
+
+
 
   return (
     <main>
@@ -38,7 +41,16 @@ export const CreateRoom = () => {
             .required("Please write a description"),
         })}
         onSubmit={(values, actions) => {
-          alert(JSON.stringify(values, null, 3));
+
+          axios.post("/study_rooms/add_new_room", {
+              title: values.title,
+              topic: values.topic,
+              description: values.description,
+            }).then((response) => {
+              console.log(response.data)
+           
+            });
+          // alert(JSON.stringify(values, null, 3));
           actions.resetForm();
         }}
       >
