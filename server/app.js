@@ -37,11 +37,49 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
   })
 
+  socket.on("start-timer",(data) => {
+    let study_time = data.study_time
+    const room = data.room
+    let break_time = data.break_time
+    
+    
+    countDown(study_time+1, room, true)
+    .then(()=>{countDown(break_time+1, room, false)})
+     
+
+  })
+
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
     
   })
 })
+
+const countDown = function(seconds,room, status) {
+ 
+  return promise = new Promise( (resolve, reject) => {
+    
+    
+    seconds--;
+   
+    const data = {room : room , time : seconds}
+    io.emit("update-time",data)
+    io.emit("update-study_stauts",{room: room, study_status :status})
+
+    if (seconds > 0) {
+      setTimeout( () => {
+        countDown(seconds,room).then(resolve);
+      }, 1000);
+    } 
+    
+    else {
+      
+      resolve("done!");
+    }
+
+  });
+
+}
 
 
 
