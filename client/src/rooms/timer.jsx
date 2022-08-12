@@ -9,11 +9,13 @@ import { useState, useEffect } from 'react';
 function Countdown(props) {
   const socket = props.socket
 
+  
+
 
 
 return (
   <>
-  <Heading size="lg">Study!</Heading>
+  <Heading size="lg">{props.study_status}</Heading>
   <div className="countdown">
     {/* <Heading>{`${minutes}:${seconds}`}</Heading> */}
     <Heading>{props.time}</Heading>

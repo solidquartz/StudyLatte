@@ -31,9 +31,10 @@ export const StudyRoom = (props) => {
   const room = props.room
 
   const [time , setTime] = useState(0)
+  const [study_status, setStudyStaus] = useState("Not started yet....")
 
   const startTimer = function () {
-    const data = {room: room, time : 60}
+    const data = {room: room, study_time : 10, break_time: 5}
     socket.emit("start-timer", data)
   
   }
@@ -43,6 +44,17 @@ export const StudyRoom = (props) => {
       setTime(data.time)
     }
     
+  })
+
+  socket.on("update-study_stauts",(data)=> {
+    if(data.room === room) {
+      if(data.study_status === true) {
+        setStudyStaus("📚Study Time📚")
+      }
+      else if(data.study_status === false) {
+        setStudyStaus("☕️Break Time☕️")
+      }
+    }
   })
 
 
@@ -80,6 +92,7 @@ export const StudyRoom = (props) => {
           <div className="centre-study-box">
             <div>
             <Countdown
+                study_status = {study_status}
                 room={room}
                 username={username}
                 socket={socket}

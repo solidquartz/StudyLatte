@@ -38,9 +38,15 @@ io.on("connection", (socket) => {
   })
 
   socket.on("start-timer",(data) => {
-    let time = data.time
+    let study_time = data.study_time
     const room = data.room
-    countDown(time,room)
+    let break_time = data.break_time
+    
+    
+    countDown(study_time+1, room, true)
+    .then(()=>{countDown(break_time+1, room, false)})
+     
+
   })
 
   socket.on("disconnect", () => {
@@ -49,20 +55,25 @@ io.on("connection", (socket) => {
   })
 })
 
-const countDown = function(i,room) {
+const countDown = function(seconds,room, status) {
  
   return promise = new Promise( (resolve, reject) => {
-    i--;
+    
+    
+    seconds--;
    
-    const data = {room : room , time : i}
+    const data = {room : room , time : seconds}
     io.emit("update-time",data)
+    io.emit("update-study_stauts",{room: room, study_status :status})
 
-
-    if (i > 0) {
+    if (seconds > 0) {
       setTimeout( () => {
-        countDown(i,room).then(resolve);
+        countDown(seconds,room).then(resolve);
       }, 1000);
-    } else {
+    } 
+    
+    else {
+      
       resolve("done!");
     }
 
