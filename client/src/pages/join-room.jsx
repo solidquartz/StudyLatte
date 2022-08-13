@@ -41,13 +41,20 @@ export const JoinRoom = () => {
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        setUsersLists([...res.data]);
-        setJoinStatus(true);
-      });
+        setUsersLists([...res.data])
+        setJoinStatus(true)
+
+      })
+      // .then(()=>{axios.get('/sockets/add').then(())})
+     
+      
 
     }
 
   };
+
+
+
   socket.on("update_usersList", (data) => {
     const room_id = data.room_id;
     axios.get(`study_rooms/entered_users/${room_id}`)
