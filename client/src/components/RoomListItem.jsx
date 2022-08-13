@@ -41,7 +41,7 @@ export const RoomListItem = (props) => {
           <Box as='span' ml='2' color='gray.600' fontSize='sm'>
             {props.entered_users.length}
 
-          
+           <a href={`/join-room?roomId=${props.id}`}>
             <Button
               as="button"
               variant="ghost"
@@ -50,7 +50,10 @@ export const RoomListItem = (props) => {
               w="100%"
             >
               Join Room
-            </Button>
+
+           </Button>
+           
+           </a>
 
           </Box>
 
