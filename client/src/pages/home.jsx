@@ -1,8 +1,10 @@
 // import { Link as RouterLink } from 'react-router-dom';
 import {
-  Button
+  Button,
 } from '@chakra-ui/react';
 import '../styles/app.scss';
+
+
 
 
 
@@ -22,14 +24,20 @@ export const Home = () => {
 
           <div className="enter-container">
 
-            <div className="enter-form">
-              <div className="username-field">
+            <div className="enter-wrapper">
+              <form action="" className="form">
+                <h3>Enter Username</h3>
+                <div className="input-group">
+                  <input type='text'/>
+                </div>
 
-              </div>
-              <div className="username-button">
-              </div>
+                <div className="input-group">
+                  <Button colorScheme='blackAlpha' size="lg">
+                    Come in!
+                  </Button>
+                </div>
+              </form>
             </div>
-
           </div>
 
           <div className="about-container">
@@ -40,12 +48,12 @@ export const Home = () => {
             <div className="about-description">
 
             </div>
+
           </div>
 
+
         </div>
-
       </div>
-
     </main>
   );
 };
