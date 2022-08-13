@@ -33,6 +33,12 @@ io.on("connection", (socket) => {
     socket.to(data.room_id).emit("update_usersList", data);
   })
 
+  socket.on("leave-user", (data) => {
+    socket.to(data.room_id).emit("update_usersList", data)
+   // socket.leave(data.room_id);
+
+ })
+
   //send message data to client to a SPECIFIC room (socket.to(room(id))
   socket.on("send_message", (data) => {
     console.log(data)
@@ -44,12 +50,13 @@ io.on("connection", (socket) => {
     const room = data.room
     let break_time = data.break_time
     
-    
     countDown(study_time+1, room, true)
     .then(()=>{countDown(break_time+1, room, false)})
      
 
   })
+
+
 
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
@@ -128,8 +135,9 @@ app.use('/users', usersRouter(db));
 const study_roomsRouter = require('./routes/study_rooms')
 app.use('/study_rooms', study_roomsRouter(db));
 
-const socket_Router = require('./routes/sockets')
-app.use('/socket', socket_Router(db));
+
+const socket_usersRouter = require('./routes/socket_users')
+app.use('/socket_users', socket_usersRouter(db));
 
 
 
