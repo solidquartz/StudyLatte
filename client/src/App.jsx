@@ -14,7 +14,7 @@ import {
   StudyRoom,
   Chat
 } from './rooms'
-import { RoomListItem } from './components/RoomListItem';
+import { RoomList } from './components/RoomList';
 
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
         <Route path="/create-room" element={<CreateRoom />} />
         <Route path="/study-room" element={<StudyRoom />} />
         <Route path="/join-room" element={<JoinRoom />} />
-        <Route path="/RoomListItem" element={<RoomListItem />} />
+        <Route path="/room-list" element={<RoomList />} />
         <Route path="/test" element={<Test />} />
         <Route path="/chat" element={<Chat />} />
         </Route>

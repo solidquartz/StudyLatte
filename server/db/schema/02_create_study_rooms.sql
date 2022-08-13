@@ -14,10 +14,13 @@ CREATE TABLE study_rooms (
   id SERIAL PRIMARY KEY NOT NULL,
 
   title VARCHAR(255) NOT NULL,
+  description VARCHAR(255),
   topic VARCHAR(255) NOT NULL,
-  sound BOOLEAN NOT NULL,
-  max_capacity INTEGER NOT NULL,
-  isPriavte BOOLEAN NOT NULL,
+
+  
+  sound BOOLEAN ,
+  max_capacity INTEGER,
+  isPriavte BOOLEAN,
 
   password VARCHAR(255),
   
@@ -30,7 +33,7 @@ CREATE TABLE study_rooms (
   study_time INTEGER,
   break_time INTEGER,
   long_break_time INTEGER,
-  pomodoro BOOLEAN NOT NULL,
+  pomodoro BOOLEAN,
 
 
   entered_users TEXT[] DEFAULT ARRAY[]::TEXT[],
