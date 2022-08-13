@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import TextAreaField from '../components/TextAreaField';
 import '../styles/app.scss';
 import axios from 'axios';
