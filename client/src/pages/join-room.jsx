@@ -1,11 +1,12 @@
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Chat,
   Users,
   Timer,
   Notes,
-  Sound
+  Sound,
 } from "../pages/index";
 import '../styles/app.scss';
 import { Formik } from "formik";
@@ -25,22 +26,39 @@ const socket = io.connect("/");
 
 
 export const JoinRoom = () => {
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [username, setUsername] = useState("Ricardo");
+  const roomId = searchParams.get("roomId")
+  const [room, setRoom] = useState(roomId);
   const [error, setError] = useState("");
   const [usersList, setUsersLists] = useState([]);
   const [joinStatus, setJoinStatus] = useState(false);
+  
+ 
+  useEffect(() => {
+  
+  console.log(roomId)
+  
+    if (roomId) {
+      setUsername("Ricardo")
+      setRoom(roomId)
+      joinRoom()
+    }
 
 
+  },[])
 
 
   const joinRoom = () => {
     console.log("joinRoom is working");
     if (username !== "" && room !== "") {
+      
       let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
+       console.log("resultado", res)
+
         setUsersLists([...res.data])
         setJoinStatus(true)
 
@@ -121,9 +139,9 @@ export const JoinRoom = () => {
                   <input
                     type="text"
                     placeholder="Room ID"
-                    onChange={(event) => {
-                      setRoom(event.target.value);
-                    }}
+                    // onChange={(event) => {
+                    //   setRoom(event.target.value);
+                    // }}
                   />
                 </div>
 
