@@ -16,7 +16,7 @@ import '../styles/app.scss';
 import axios from 'axios';
 
 
-export const CreateRoom = (props) => {
+export const CreateRoom = () => {
   let navigate = useNavigate();
 
 
