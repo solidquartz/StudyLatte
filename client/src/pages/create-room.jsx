@@ -48,7 +48,7 @@ export const CreateRoom = () => {
               description: values.description,
             }).then((response) => {
               console.log(response.data.id)
-             
+              navigate(`/join-room?roomId=${response.data.id}`)
            
             });
           // alert(JSON.stringify(values, null, 3));
