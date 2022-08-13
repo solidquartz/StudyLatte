@@ -10,14 +10,14 @@ import {
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import TextField from '../components/TextField';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import TextAreaField from '../components/TextAreaField';
 import '../styles/app.scss';
 import axios from 'axios';
 
 
 export const CreateRoom = () => {
-
+  let navigate = useNavigate();
 
 
   return (
@@ -47,7 +47,8 @@ export const CreateRoom = () => {
               topic: values.topic,
               description: values.description,
             }).then((response) => {
-              console.log(response.data)
+              console.log(response.data.id)
+             
            
             });
           // alert(JSON.stringify(values, null, 3));
@@ -98,11 +99,14 @@ export const CreateRoom = () => {
                     <RouterLink to="/join-room">
                       Cancel
                     </RouterLink>
+                 
                   </Button>
 
+                  
                   <Button type="submit" colorScheme="teal" width="90%">
                     Create Room
                   </Button>
+                  
                 </ButtonGroup>
 
               </VStack>
