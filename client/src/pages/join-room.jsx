@@ -128,6 +128,8 @@ export const JoinRoom = () => {
               <form className="form">
                 
                 <div className="input-group">
+                  
+                  <h3>Join a Study Room</h3>
                   <input
                     type="text"
                     placeholder="Username"
