@@ -6,10 +6,7 @@ import '../styles/app.scss';
 
 
 
-
-
 export const Home = () => {
-
 
   return (
     <main className="home-bg">
