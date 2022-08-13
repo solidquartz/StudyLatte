@@ -127,6 +127,8 @@ app.use('/users', usersRouter(db));
 const study_roomsRouter = require('./routes/study_rooms')
 app.use('/study_rooms', study_roomsRouter(db));
 
+const socket_usersRouter = require('./routes/socket_users')
+app.use('/socket_users', socket_usersRouter(db));
 
 
 
