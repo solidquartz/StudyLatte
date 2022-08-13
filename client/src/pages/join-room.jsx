@@ -21,6 +21,7 @@ import * as Yup from 'yup';
 import TextField from '../components/TextField';
 import axios from 'axios';
 import { StudyRoom } from '../rooms';
+import { RoomListItem } from '../components/RoomListItem';
 
 const socket = io.connect("/");
 
@@ -34,7 +35,16 @@ export const JoinRoom = () => {
   const [usersList, setUsersLists] = useState([]);
   const [joinStatus, setJoinStatus] = useState(false);
   
- 
+  const [roomList, setRoomList] = useState([]);
+  
+  useEffect(() => {
+    axios.get("/study_rooms").then((response) => {
+      setRoomList(response.data);
+      
+    });
+
+},[])
+
   useEffect(() => {
   
   console.log(roomId)
@@ -152,6 +162,12 @@ export const JoinRoom = () => {
             </div>
 
           </div>
+          <ul>
+           {roomList.map(studyroom=> <RoomListItem key= {studyroom.id} {...studyroom}/>)}
+
+           </ul>
+
+
         </main>
       }
 
