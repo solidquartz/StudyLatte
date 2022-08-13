@@ -46,6 +46,9 @@ export const Home = () => {
             </div>
 
             <div className="about-description">
+              <p>Studying is always better with friends.</p>
+              <p>While StudyLatte can't pour you a cup of coffee, we can bring the cafe study experience to you. Inspired by "Study With Me" videos, StudyLatte is a virtual study room. You can study alone or together with a group of friends with a shared study timer to keep you all on track and in sync. Enjoy the ambience and share your goals together as you work hard in peace!</p>
+              <p>To get started, enter a username, then either choose a study room to join, or create your very own that you can share with friends.</p>
 
             </div>
 
