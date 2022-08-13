@@ -35,7 +35,8 @@ export const JoinRoom = () => {
 
 
   const joinRoom = () => {
-    console.log("joinRoom is working")
+
+    console.log(`CLIENT SIDE: socketID ${socket.id} name ${username}`)
     if (username !== "" && room !== "") {
       let data = { user: username, room_id: room }
       socket.emit("join_room", data);
@@ -43,16 +44,24 @@ export const JoinRoom = () => {
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
         setUsersLists([...res.data])
         setJoinStatus(true)
+
       })
+      // .then(()=>{axios.get('/sockets/add').then(())})
+     
+      
 
     }
 
   };
+
+
+
   socket.on("update_usersList", (data) => {
     const room_id = data.room_id
     axios.get(`study_rooms/entered_users/${room_id}`)
       .then(res => setUsersLists(res.data))
   })
+
 
   const removeUser = function () {
     axios.get(`/study_rooms/${room}/leave/${username}`).then(res => {
@@ -65,19 +74,19 @@ export const JoinRoom = () => {
     window.addEventListener('beforeunload', alertUser)
     window.addEventListener('unload', handleTabClosing)
     return () => {
-        window.removeEventListener('beforeunload', alertUser)
-        window.removeEventListener('unload', handleTabClosing)
+      window.removeEventListener('beforeunload', alertUser)
+      window.removeEventListener('unload', handleTabClosing)
     }
-})
+  })
 
-const handleTabClosing = () => {
+  const handleTabClosing = () => {
     removeUser()
-}
+  }
 
-const alertUser = (event) => {
+  const alertUser = (event) => {
     event.preventDefault()
     event.returnValue = 'Are you sure?'
-}
+  }
 
   return (
 
@@ -107,7 +116,7 @@ const alertUser = (event) => {
         </main>
       }
 
-      {joinStatus && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser = {removeUser}/>}
+      {joinStatus && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
 
 
 
