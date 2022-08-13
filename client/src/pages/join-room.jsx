@@ -41,43 +41,63 @@ export const JoinRoom = () => {
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        setUsersLists([...res.data]);
-        setJoinStatus(true);
-      });
+        setUsersLists([...res.data])
+        setJoinStatus(true)
+
+      })
+      // .then(()=>{axios.get('/sockets/add').then(())})
+     
+      
 
     }
 
   };
+
   socket.on("update_usersList", (data) => {
+   
     const room_id = data.room_id;
-    axios.get(`study_rooms/entered_users/${room_id}`)
-      .then(res => setUsersLists(res.data));
+    update_usersList(room_id)
+    
   });
 
-  const removeUser = function() {
+  const removeUser = ()=> {
+    let data = { user: username, room_id: room };
+    
     axios.get(`/study_rooms/${room}/leave/${username}`).then(res => {
       setUsersLists([...res.data]);
-      setJoinStatus(false);
+      socket.emit("leave-user",data);
+      setJoinStatus(false)
+          
     });
+    
   };
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', alertUser);
-    window.addEventListener('unload', handleTabClosing);
-    return () => {
-      window.removeEventListener('beforeunload', alertUser);
-      window.removeEventListener('unload', handleTabClosing);
-    };
-  });
 
-  const handleTabClosing = () => {
-    removeUser();
-  };
+  const update_usersList = function(room_id) {
+    console.log("axios update working")
+    axios.get(`study_rooms/entered_users/${room_id}`)
+      .then(res => setUsersLists(res.data));
+  }
 
-  const alertUser = (event) => {
-    event.preventDefault();
-    event.returnValue = 'Are you sure?';
-  };
+
+
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', alertUser);
+  //   window.addEventListener('unload', handleTabClosing);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', alertUser);
+  //     window.removeEventListener('unload', handleTabClosing);
+  //   };
+  // });
+
+  // const handleTabClosing = () => {
+  //   removeUser();
+  // };
+
+  // const alertUser = (event) => {
+  //   event.preventDefault();
+  //   event.returnValue = 'Are you sure?';
+  // };
 
   return (
 
