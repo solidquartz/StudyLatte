@@ -92,7 +92,7 @@ export const JoinRoom = () => {
                 <div className="input-group">
                   <input
                     type="text"
-                    placeholder="Name"
+                    placeholder="Username"
                     onChange={(event) => {
                       setUsername(event.target.value);
                     }}
@@ -107,7 +107,7 @@ export const JoinRoom = () => {
                   />
                 </div>
 
-                  <Button onClick={joinRoom} colorScheme='blackAlpha' size='md'>Join a Room</Button>
+                  <Button onClick={joinRoom} colorScheme='blackAlpha' size='md'>Join Room</Button>
                 
               </form>
             </div>
