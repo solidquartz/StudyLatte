@@ -20,7 +20,7 @@ import '../styles/app.scss';
 
 //component:  
 export const Signup = () => {
- const [signup,setsignup] = useState("")
+ const [signup,setSignup] = useState("")
   return (
 
     <main>
@@ -59,7 +59,7 @@ export const Signup = () => {
           password: values.password,
           email: values.email,
         }).then((response) => {
-          setsignup(response.data)
+          setSignup(response.data)
           console.log(signup);
         });
 

@@ -92,9 +92,7 @@ export const CreateRoom = () => {
                   placeholder='Description' />
 
 
-                
 
-                
                 <ButtonGroup gap="2">
                   <Button type="button" colorScheme="gray" width="50%">
                     <RouterLink to="/join-room">
