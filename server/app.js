@@ -28,7 +28,8 @@ io.on("connection", (socket) => {
   //join a room
   socket.on("join_room", (data) => {
     socket.join(data.room_id);
-    console.log(`user with ID: ${data.user} joined room: ${data.room_id}`)
+    console.log(`user with name: ${data.user} joined room: ${data.room_id} socke_id: ${socket.id}`)
+
     socket.to(data.room_id).emit("update_usersList", data);
   })
 
@@ -134,8 +135,10 @@ app.use('/users', usersRouter(db));
 const study_roomsRouter = require('./routes/study_rooms')
 app.use('/study_rooms', study_roomsRouter(db));
 
+
 const socket_usersRouter = require('./routes/socket_users')
 app.use('/socket_users', socket_usersRouter(db));
+
 
 
 
