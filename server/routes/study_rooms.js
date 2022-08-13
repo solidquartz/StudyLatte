@@ -91,7 +91,7 @@ module.exports = (db) => {
 
     db.query(command,[title, description, topic])
     .then(result => {
-        res.send(result.rows[0])
+        res.send(result.rows[0].entered_users)
 
     })
 
