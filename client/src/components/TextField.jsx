@@ -4,7 +4,7 @@ import {
   FormLabel,
 } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
-import { Field, useField } from "formik";
+import { useField } from "formik";
 
 
 //reusable text input component
@@ -13,8 +13,8 @@ const TextField = ({ label, ...props }) => {
 
   return (
     <FormControl isInvalid={meta.error && meta.touched}>
-      <FormLabel htmlFor="email">{label}</FormLabel>
-      <Field as={Input}
+      <FormLabel htmlFor={props.name}>{label}</FormLabel>
+      <Input
         {...field}
         {...props}
       />

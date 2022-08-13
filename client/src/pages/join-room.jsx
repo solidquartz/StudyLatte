@@ -28,17 +28,16 @@ export const JoinRoom = () => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [error, setError] = useState("");
-  const [usersList, setUsersLists] = useState([])
-  const [joinStatus, setJoinStatus] = useState(false)
+  const [usersList, setUsersLists] = useState([]);
+  const [joinStatus, setJoinStatus] = useState(false);
 
 
 
 
   const joinRoom = () => {
-
-    console.log(`CLIENT SIDE: socketID ${socket.id} name ${username}`)
+    console.log("joinRoom is working");
     if (username !== "" && room !== "") {
-      let data = { user: username, room_id: room }
+      let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
@@ -57,61 +56,69 @@ export const JoinRoom = () => {
 
 
   socket.on("update_usersList", (data) => {
-    const room_id = data.room_id
+    const room_id = data.room_id;
     axios.get(`study_rooms/entered_users/${room_id}`)
-      .then(res => setUsersLists(res.data))
-  })
+      .then(res => setUsersLists(res.data));
+  });
 
-
-  const removeUser = function () {
+  const removeUser = function() {
     axios.get(`/study_rooms/${room}/leave/${username}`).then(res => {
-      setUsersLists([...res.data])
-      setJoinStatus(false)
-    })
-  }
+      setUsersLists([...res.data]);
+      setJoinStatus(false);
+    });
+  };
 
   useEffect(() => {
-    window.addEventListener('beforeunload', alertUser)
-    window.addEventListener('unload', handleTabClosing)
+    window.addEventListener('beforeunload', alertUser);
+    window.addEventListener('unload', handleTabClosing);
     return () => {
-      window.removeEventListener('beforeunload', alertUser)
-      window.removeEventListener('unload', handleTabClosing)
-    }
-  })
+      window.removeEventListener('beforeunload', alertUser);
+      window.removeEventListener('unload', handleTabClosing);
+    };
+  });
 
   const handleTabClosing = () => {
-    removeUser()
-  }
+    removeUser();
+  };
 
   const alertUser = (event) => {
-    event.preventDefault()
-    event.returnValue = 'Are you sure?'
-  }
+    event.preventDefault();
+    event.returnValue = 'Are you sure?';
+  };
 
   return (
 
     <main >
       {!joinStatus &&
         <main>
-          <Heading>Join a Room</Heading>
 
           <div className="joinChatContainer">
+            <div className="joinChatWrapper">
+              <form className="form">
+                
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    onChange={(event) => {
+                      setUsername(event.target.value);
+                    }}
+                  />
 
-            <input
-              type="text"
-              placeholder="Name"
-              onChange={(event) => {
-                setUsername(event.target.value);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Room ID"
-              onChange={(event) => {
-                setRoom(event.target.value);
-              }}
-            />
-            <button onClick={joinRoom}>Join a Room</button>
+                  <input
+                    type="text"
+                    placeholder="Room ID"
+                    onChange={(event) => {
+                      setRoom(event.target.value);
+                    }}
+                  />
+                </div>
+
+                  <Button onClick={joinRoom} colorScheme='blackAlpha' size='md'>Join Room</Button>
+                
+              </form>
+            </div>
+
           </div>
         </main>
       }
