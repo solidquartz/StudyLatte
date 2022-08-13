@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS socket_users CASCADE;
+-- CREATE USERS
+CREATE TABLE socket_users (
+  id SERIAL PRIMARY KEY NOT NULL,
+
+  socket_id VARCHAR(255) NOT NULL;
+  username VARCHAR(255) NOT NULL;
+  
+  profile_img VARCHAR(255)
+);
