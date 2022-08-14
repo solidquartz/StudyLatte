@@ -5,7 +5,6 @@ import {
   Button,
   Flex,
   VStack,
-  Heading,
   ButtonGroup,
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
@@ -19,9 +18,6 @@ import axios from 'axios';
 export const CreateRoom = () => {
 
   let navigate = useNavigate();
-
-
-
 
   return (
     <main>
@@ -96,23 +92,17 @@ export const CreateRoom = () => {
                         type="text"
                         placeholder='Description' />
 
-
-
                       <ButtonGroup gap="2">
                         <Button type="button" colorScheme="whiteAlpha" width="50%">
                           <RouterLink to="/join-room">
                             Cancel
                           </RouterLink>
-
                         </Button>
-
 
                         <Button type="submit" colorScheme="cyan" width="90%">
                           Create Room
                         </Button>
-
                       </ButtonGroup>
-
                     </VStack>
                   </Box>
                 </Flex>
