@@ -147,7 +147,7 @@ export const JoinRoom = () => {
                   />
                 </div>
 
-                  <Button onClick={joinRoom} colorScheme='blackAlpha' size='md'>Join Room</Button>
+                  <Button onClick={joinRoom} colorScheme='cyan' size='md'>Join Room</Button>
                 
               </form>
             </div>
