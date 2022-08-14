@@ -1,12 +1,7 @@
-import {
-  Box
-} from '@chakra-ui/react';
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {RoomListItem} from './RoomListItem';
+import {RoomListItem} from '../components/RoomListItem';
 
-
-//will need to import this into RoomList/join-room wherever we use it
 
 export const RoomList = (props) => {
   const [roomList, setRoomList] = useState([]);
@@ -17,7 +12,8 @@ export const RoomList = (props) => {
       
     });
 
-},[])
+  }, [])
+  
 return (
 
   <ul>

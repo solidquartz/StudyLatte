@@ -14,7 +14,7 @@ import {
   StudyRoom,
   Chat
 } from './rooms'
-import { RoomList } from './components/RoomList';
+import { RoomList } from './pages/room-list';
 
 
 export default function App() {
