@@ -50,8 +50,9 @@ io.on("connection", (socket) => {
     const room = data.room
     let break_time = data.break_time
     
-    countDown(study_time+1, room, true)
-    .then(()=>{countDown(break_time+1, room, false)})
+    
+    countDown(study_time, room, true)
+    .then(()=>{countDown(break_time, room, false)})
      
 
   })

@@ -141,7 +141,7 @@ export const JoinRoom = () => {
                   <h3>Join a Study Room</h3>
                   <input
                     type="text"
-                    placeholder="Username"
+                    
                     onChange={(event) => {
                       setUsername(event.target.value);
                     }}
