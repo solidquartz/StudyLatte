@@ -30,29 +30,33 @@ export const StudyRoom = (props) => {
   const usersList = props.usersList
   const room = props.room
 
-  const [time , setTime] = useState(0)
+  const [time, setTime] = useState(0)
   const [study_status, setStudyStaus] = useState("Not started yet....")
+  const [timeSetted, setTimeSetted] = useState(false)
+  const [study_time, setStudy_time] = useState(0)
+  const [break_time, setBreak_time] = useState(0)
   
 
+
   const startTimer = function () {
-    const data = {room: room, study_time : 10, break_time: 5}
+    const data = { room: room, study_time: study_time, break_time: break_time }
     socket.emit("start-timer", data)
-  
+
   }
 
   socket.on("update-time", (data) => {
-    if(data.room === room) {
+    if (data.room === room) {
       setTime(data.time)
     }
-    
+
   })
 
-  socket.on("update-study_stauts",(data)=> {
-    if(data.room === room) {
-      if(data.study_status === true) {
+  socket.on("update-study_stauts", (data) => {
+    if (data.room === room) {
+      if (data.study_status === true) {
         setStudyStaus("📚Study Time📚")
       }
-      else if(data.study_status === false) {
+      else if (data.study_status === false) {
         setStudyStaus("☕️Break Time☕️")
       }
     }
@@ -91,16 +95,46 @@ export const StudyRoom = (props) => {
           </div>
 
           <div className="centre-study-box">
-            <div>
-            <Countdown
-                study_status = {study_status}
-                room={room}
-                username={username}
-                socket={socket}
-                time = {time}
-                onClick = {startTimer}
-              />
-            </div>
+            {timeSetted &&
+              <div>
+                <Countdown
+                  study_status={study_status}
+                  room={room}
+                  username={username}
+                  socket={socket}
+                  time={time}
+                  onClick={startTimer}
+                />
+              </div>}
+            {!timeSetted &&
+              <div>
+               <h1>Study Time</h1>
+                <input
+                  placeholder="minutes"
+                  onChange = {(event) => {setStudy_time(event.target.value)}}
+                  onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    } 
+                  }} />
+                  <h1>Break Time</h1>
+                <input
+                  placeholder="minutes"
+                  onChange = {(event) => {setBreak_time(event.target.value)}}
+                  onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                   
+                  }} />
+                  <button onClick = {()=> {setTimeSetted(true)
+                  console.log(study_time,break_time)}}>SET TIME</button>
+                    
+
+              </div>
+
+
+            }
           </div>
 
           <div className="right-study-bar">
