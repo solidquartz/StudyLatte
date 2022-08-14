@@ -29,7 +29,7 @@ export const Home = () => {
                 </div>
 
                 <div className="input-group">
-                  <Button colorScheme='blackAlpha' size="lg"> //context - everywhere
+                  <Button colorScheme='blackAlpha' size="lg"> 
                     Come in!
                   </Button>
                 </div>
