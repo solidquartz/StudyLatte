@@ -1,21 +1,14 @@
-import io from 'socket.io-client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Chat,
   Users,
-  Timer,
-  Notes,
   Sound
 } from "./index";
 import '../styles/app.scss';
-import { Formik } from "formik";
 import {
   Heading,
   Button
 } from "@chakra-ui/react";
-import * as Yup from 'yup';
-import TextField from '../components/TextField';
-import axios from 'axios';
 import Countdown from './timer';
 
 // const socket = io.connect("/");
@@ -138,14 +131,9 @@ export const StudyRoom = (props) => {
           </div>
 
           <div className="right-study-bar">
-            <div className="chat-component">
               <Chat socket={socket} username={username} room={room} />
-            </div>
 
 
-            <div className="sound-component">
-              <Sound />
-            </div>
           </div>
 
         </div>

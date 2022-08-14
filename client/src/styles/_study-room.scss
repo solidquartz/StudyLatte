@@ -1,13 +1,17 @@
-// .study-main {
-//   // background: url("../images/kris-atomic-3b2tADGAWnU-unsplash.jpg");
-//   // background-repeat: no-repeat;
-//   // background-size: cover;
-// }
+.study-main {
+  background: url("../images/leafy-cafe.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+
+}
 
 .study-dashboard {
+
+  max-height: 50vh;
   display: flex;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
   flex-direction: column;
   width: 100%;
   height: 100%;
@@ -20,6 +24,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem;
+
 }
 
 .study-components {
@@ -27,6 +32,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: .5rem;
+  align-items: center;
 }
 
 .left-study-bar {
@@ -54,19 +60,10 @@
 .right-study-bar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 1rem;
+  align-items: flex-end;
 }
 
-.chat-component {
-  padding-bottom: 1rem;
-}
-
-.sound-component {
-  display: flex;
-  padding-top: 1rem;
-  justify-content: center;
-}
 
 .timer-contents {
   padding: 2rem;
