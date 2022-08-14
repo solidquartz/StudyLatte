@@ -8,6 +8,26 @@ import { useState, useEffect } from 'react';
 
 function Countdown(props) {
   const socket = props.socket
+  const [timeStarted , setTimeStarted] = useState(false)
+
+
+  const timeConverter = function (totalSeconds) {
+    let minutes = Math.floor(totalSeconds/60);
+    let seconds = totalSeconds % 60
+    function padTo2D(num) {
+      return num.toString().padStart(2,'0')
+    }
+  
+    return `${padTo2D(minutes)} : ${padTo2D(seconds)}`
+
+  }
+  const handleClick = function () {
+    setTimeStarted(true)
+    props.onClick()
+
+
+  }
+
 
   
 
@@ -18,8 +38,14 @@ return (
   <Heading size="lg">{props.study_status}</Heading>
   <div className="countdown">
     {/* <Heading>{`${minutes}:${seconds}`}</Heading> */}
-    <Heading>{props.time}</Heading>
-    <Button onClick={ props.onClick}>Start Timer</Button>
+    <Heading>{timeConverter(props.time)}</Heading>
+    <Button 
+    disabled = {timeStarted}
+    onClick={   
+      handleClick  
+      }
+    
+    >Start Timer</Button>
   </div>
   </>
 );
