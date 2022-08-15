@@ -1,9 +1,7 @@
-@import "./fonts";
+@use "./fonts";
 
 .home-bg {
   background: url("../images/purty-wood.png");
-
-
 }
 
 .home-container {
@@ -12,7 +10,7 @@
 
     .title-header {
       h1 {
-        font-family: $pacifico;
+        font-family: fonts.$pacifico;
         font-size: 6rem;
         text-align: center;
       }
@@ -26,9 +24,10 @@
       justify-content: center;
       flex-direction: column;
       text-align: center;
+      background-position: 40%;
 
       h3 {
-        font-family: $raleway;
+        font-family: fonts.$raleway;
         font-weight: 400;
         font-size: 1.5rem;
         color: whitesmoke;
@@ -73,7 +72,7 @@
     }
 
     .about-header {
-      font-family: $pacifico;
+      font-family: fonts.$pacifico;
       font-size: 4rem;
       text-align: center;
       padding-top: 1rem;
@@ -81,14 +80,18 @@
 
     .about-description {
    
-      font-family: $raleway;
+      font-family: fonts.$raleway;
       font-size: 1.2rem;
       padding-top: 1rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-bottom: 5rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
+      padding-bottom: 4rem;
       text-align: center;
    
     }
   }
+}
+
+.create-button {
+  padding-top: 1rem;
 }

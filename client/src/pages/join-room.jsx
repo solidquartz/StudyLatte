@@ -1,28 +1,13 @@
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import {
-  Chat,
-  Users,
-  Timer,
-  Notes,
-  Sound,
-} from "../pages/index";
 import '../styles/app.scss';
-import { Formik } from "formik";
 import {
-  Box,
-  Button,
-  Flex,
-  VStack,
-  Heading
+  Button
 } from "@chakra-ui/react";
-import * as Yup from 'yup';
-import TextField from '../components/TextField';
 import axios from 'axios';
 import { StudyRoom } from '../rooms';
 import { RoomListItem } from '../components/RoomListItem';
-import { useLocation } from 'react-router-dom';
 import { Home } from '../pages/home';
 import { CreateRoom } from './create-room';
 
@@ -35,15 +20,15 @@ export const JoinRoom = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [username, setUsername] = useState("");
-  const roomId = searchParams.get("roomId")
+  const roomId = searchParams.get("roomId");
   const [room, setRoom] = useState("");
   const [error, setError] = useState("");
   const [usersList, setUsersLists] = useState([]);
   const [joinStatus, setJoinStatus] = useState(false);
   const [roomList, setRoomList] = useState([]);
   const [entername_status, setEntername_status] = useState(false);
-  const [createRoomMode, setCreatRoomMode] = useState(false)
-  const [inputRoom, setInputRoom] = useState("")
+  const [createRoomMode, setCreatRoomMode] = useState(false);
+  const [inputRoom, setInputRoom] = useState("");
   console.log("from join -room current room", room);
 
 
@@ -65,7 +50,7 @@ export const JoinRoom = () => {
 
     });
 
-  }, [])
+  }, []);
 
   // useEffect(() => {
 
@@ -80,29 +65,29 @@ export const JoinRoom = () => {
   // },[])
 
   useEffect(() => {
-    joinRoom()
+    joinRoom();
 
 
-  }, [room])
+  }, [room]);
 
 
 
   const joinRoom = async () => {
     console.log("joinRoom is working");
-    console.log("roomid ", room)
+    console.log("roomid ", room);
     if (username !== "" && room !== "") {
 
       let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
       await axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        setUsersLists([...res.data])
+        setUsersLists([...res.data]);
 
 
       }).then(() => {
-        setJoinStatus(true)
-        setCreatRoomMode(false)
-      })
+        setJoinStatus(true);
+        setCreatRoomMode(false);
+      });
 
     }
 
@@ -113,7 +98,7 @@ export const JoinRoom = () => {
   socket.on("update_usersList", (data) => {
 
     const room_id = data.room_id;
-    update_usersList(room_id)
+    update_usersList(room_id);
 
   });
 
@@ -123,18 +108,18 @@ export const JoinRoom = () => {
     axios.get(`/study_rooms/${room}/leave/${username}`).then(res => {
       setUsersLists([...res.data]);
       socket.emit("leave-user", data);
-      setJoinStatus(false)
+      setJoinStatus(false);
 
     });
 
   };
 
 
-  const update_usersList = function (room_id) {
-    console.log("axios update working")
+  const update_usersList = function(room_id) {
+    console.log("axios update working");
     axios.get(`study_rooms/entered_users/${room_id}`)
       .then(res => setUsersLists(res.data));
-  }
+  };
 
 
 
@@ -165,7 +150,7 @@ export const JoinRoom = () => {
               <form className="form">
 
                 <div className="input-group">
-                  <h1>welcome {username}</h1>
+                  <h1>Welcome, {username}!</h1>
 
                   <h3>Join a Study Room</h3>
 
@@ -179,14 +164,16 @@ export const JoinRoom = () => {
                     }}
                   />
                 </div>
-                <div><Button onClick={()=>setRoom(inputRoom)} colorScheme='cyan' size='md'>Join Room</Button>
+                <div><Button onClick={() => setRoom(inputRoom)} colorScheme='cyan' size='md'>Join Room</Button>
                   <br />
                   <br />
-                  <p>or do you want to create new room?&nbsp; </p>
+                  <p>Or would you like to create a new room?&nbsp; </p>
 
 
-
-                  <Button colorScheme='cyan' size='md' onClick={() => setCreatRoomMode(true)}>Create Room</Button></div>
+                  <div className="create-button">
+                    <Button colorScheme='cyan' size='md' onClick={() => setCreatRoomMode(true)}>Create Room</Button>
+                  </div>
+                </div>
 
               </form>
             </div>
