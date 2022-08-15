@@ -31,6 +31,8 @@ export const StudyRoom = (props) => {
   const [study_time, setStudy_time] = useState(0)
   const [break_time, setBreak_time] = useState(0)
   const [isAdmin, setisAdmin] = useState(false);
+  const [title, setTitle] = useState("")
+  
 
   useEffect(() => {
     if (usersList[0] === username) {
