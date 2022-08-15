@@ -175,7 +175,7 @@ export const JoinRoom = () => {
         </main>
       }
 
-      {joinStatus && entername_status && !createRoomMode && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
+      {joinStatus && entername_status && !createRoomMode && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} setUsersLists = {setUsersLists} />}
 
     </main>
   );
