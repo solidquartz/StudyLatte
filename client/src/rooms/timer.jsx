@@ -4,6 +4,7 @@ import {
 } from "@chakra-ui/react";
 import useCountdown from './useCountdown';
 import { useState, useEffect } from 'react';
+import '../styles/app.scss';
 
 
 function Countdown(props) {
@@ -24,13 +25,7 @@ function Countdown(props) {
   const handleClick = function () {
     setTimeStarted(true)
     props.onClick()
-
-
   }
-
-
-  
-
 
 
 return (
@@ -38,15 +33,19 @@ return (
   <Heading size="lg">{props.study_status}</Heading>
   <div className="countdown">
     {/* <Heading>{`${minutes}:${seconds}`}</Heading> */}
-    <Heading>{timeConverter(props.time)}</Heading>
+      <Heading>{timeConverter(props.time)}</Heading>
+      
+      <div>
     <Button 
     disabled = {timeStarted}
     onClick={   
       handleClick  
       }
-    
-    >Start Timer</Button>
-  </div>
+        >
+          Start Timer
+        </Button>
+      </div>
+    </div>
   </>
 );
 }

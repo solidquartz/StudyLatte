@@ -70,7 +70,7 @@ export const StudyRoom = (props) => {
 
         <div className="study-header">
           <div>
-            <Heading>Welcome to Aky's Study Room</Heading>
+            <h1>Welcome to Aky's Study Room</h1>
           </div>
           <div>
             <Button type="button" onClick={props.removeUser}>
@@ -82,7 +82,7 @@ export const StudyRoom = (props) => {
         <div className="study-components">
           <div className="left-study-bar">
             <div className="users-component">
-              <Heading size="sm">Study Buddies</Heading>
+              <h2 size="sm">Study Buddies</h2>
               {users}
             </div>
           </div>
@@ -101,7 +101,7 @@ export const StudyRoom = (props) => {
               </div>}
             {!timeSetted &&
               <div>
-               <h1>Study Time</h1>
+               <h2>Study Time</h2>
                 <input
                   placeholder="minutes"
                   onChange = {(event) => {setStudy_time(event.target.value)}}
@@ -110,7 +110,7 @@ export const StudyRoom = (props) => {
                       event.preventDefault();
                     } 
                   }} />
-                  <h1>Break Time</h1>
+                  <h2>Break Time</h2>
                 <input
                   placeholder="minutes"
                   onChange = {(event) => {setBreak_time(event.target.value)}}
@@ -120,8 +120,11 @@ export const StudyRoom = (props) => {
                     }
                    
                   }} />
-                  <button onClick = {()=> {setTimeSetted(true)
-                  console.log(study_time,break_time)}}>SET TIME</button>
+                <Button
+                  colorScheme='whiteAlpha'
+                  onClick={() => {
+                    setTimeSetted(true)
+                  console.log(study_time,break_time)}}>SET TIME</Button>
                     
 
               </div>
