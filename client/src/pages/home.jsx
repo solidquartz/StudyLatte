@@ -3,10 +3,24 @@ import {
   Button,
 } from '@chakra-ui/react';
 import '../styles/app.scss';
+import React, { useState }  from 'react';
+import { useAuth } from '../providers/auth';
 
 
 
 export const Home = () => {
+  const [ input, setInput] = useState({name: ""});
+  const { setUser} = useAuth()
+  const handleLogin = () => {
+   
+    localStorage.setItem('user', JSON.stringify(input));
+    setUser(input)
+  };
+
+  const { user } = useAuth();
+  console.log(user);
+
+
 
   return (
     <main className="home-bg">
@@ -25,11 +39,11 @@ export const Home = () => {
               <form action="" className="form">
                 <h3>Enter Username</h3>
                 <div className="input-group">
-                  <input type='text'/>
+                  <input type='text' onChange={(e) => setInput({name: e.target.value})}/>
                 </div>
 
                 <div className="input-group">
-                  <Button colorScheme='blackAlpha' size="lg"> 
+                  <Button onClick={handleLogin}  colorScheme='blackAlpha' size="lg"> 
                     Come in!
                   </Button>
                 </div>
