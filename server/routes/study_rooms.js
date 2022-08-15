@@ -97,6 +97,35 @@ module.exports = (db) => {
 
   })
 
+  // add new user to check if its duplicated or not
+  router.post(`/new_username`,(req,res) => {
+  // SEARCH and Insert
+    const search = `SELECT * FROM usernames WHERE username = ($1);`
+
+    const insert = `INSERT INTO usernames (username) Values ($1) returning *;` ;
+    const name = req.body.username;
+    
+    db.query(search,[name])
+    .then(result => {
+        if(!result.rows[0]){
+            db.query(insert,[name])
+            .then(result => {
+                res.send(result.rows[0])
+            })
+            // .catch(err => {
+            //     res.send(err)
+            // })
+        }else{
+            res.send("User already exists!")
+        }
+
+    })
+    // .catch(err => {
+    //     res.send(err)
+    // })
+
+
+  })
 
 
 
