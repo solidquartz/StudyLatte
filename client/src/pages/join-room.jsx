@@ -30,19 +30,13 @@ export const JoinRoom = () => {
   const [entername_status, setEntername_status] = useState(false);
   const [createRoomMode, setCreatRoomMode] = useState(false);
   const [inputRoom, setInputRoom] = useState("");
-  console.log("from join -room current room", room);
+ 
 
 
+useEffect(()=> {
+  setError("")
 
-  // useEffect(()=> {
-  //   if(!entername_status) {
-  //     setEntername_status(true)
-  //   }
-
-  // },[entername_status])
-
-
-
+},[inputRoom])
 
 
   useEffect(() => {
@@ -53,17 +47,30 @@ export const JoinRoom = () => {
 
   }, []);
 
-  // useEffect(() => {
+const validCheck = function(room_id) {
+  console.log("validworks")
+  
+  axios.get(`/study_rooms/room_info/${room_id}`).then(res => {
+    console.log("res", res.data)
+    if(res.data.error) {
+      return setError(`${res.data.error}...`)
+    }
+    else if(!res.data.error) {
+      if(res.data.entered_users.length >= 7) {
+        return setError("this room is currently full...")}
+      else if(res.data.entered_users >=0 && res.data.entered_users < 7) {
+         setError("")
+         setRoom(room_id)
+         return true
+
+      } 
+
+    }
+    
+  })
 
 
-
-  //   if (roomId) {
-  //     // setUsername("Ricardo")
-  //     setRoom(roomId)
-  //     joinRoom()
-  //   }
-
-  // },[])
+}
 
   useEffect(() => {
     joinRoom();
@@ -143,12 +150,29 @@ export const JoinRoom = () => {
                   <input
                     type="text"
                     placeholder="Room ID"
+                    
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }}}
+
                     onChange={(event) => {
                       setInputRoom(event.target.value);
                     }}
                   />
+                  {error && <p>{error}</p>}
                 </div>
-                <div><Button onClick={() => setRoom(inputRoom)} colorScheme='cyan' size='md'>Join Room</Button>
+                <div><Button onClick={() => {
+                  validCheck(inputRoom)
+                  
+                  
+                } 
+                
+                
+                }
+                  
+                  colorScheme='cyan' size='md'>
+                    Join Room</Button>
                   <br />
                   <br />
                   <p>Or would you like to create a new room?&nbsp; </p>

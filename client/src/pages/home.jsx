@@ -5,12 +5,33 @@ import {
 import '../styles/app.scss';
 import {Link, Navigate, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+import { validateYupSchema } from 'formik';
 
 
 
 export const Home = (props) => {
   const setUsername = props.setUsername
   const setEntername_status = props.setEntername_status
+  const [errorMessage, setErrorMessage] = useState(""); 
+ let navigate = useNavigate();
+ const [input_username, setInputUsername] = useState("");
+ const handleFormSubmit = (event) => {
+  event.preventDefault();
+  axios.post("/study_rooms/new_username", {username: input_username}).then((response)=> {
+
+    console.log(response)
+    if(response.data === "User already exists!") {
+      setErrorMessage(response.data)
+    } else { 
+      setUsername(setInputUsername);
+      setEntername_status(true);
+    }
+  })
+ }
+
+
+
 
   return (
     <main className="home-bg">
@@ -26,17 +47,23 @@ export const Home = (props) => {
           <div className="enter-container">
 
             <div className="enter-wrapper">
-              <form action="" className="form">
+            <form action="" className="form">
+              
                 <h3>Enter Username</h3>
                 <div className="input-group">
-                  <input type='text' onChange={(e)=>setUsername(e.target.value)}/>
+                  <input type='text' onChange={(e)=>setInputUsername(e.target.value)}
+                  
+                  />
                 </div>
 
                 <div className="input-group">
-                  <Button colorScheme='blackAlpha' size="lg" onClick={()=>setEntername_status(true)}>Come in!
+                  <Button colorScheme='blackAlpha' size="lg" onClick={handleFormSubmit} >Come in!
                   </Button>
+                  {errorMessage && <h2>{errorMessage}</h2>}
                 </div>
-              </form>
+                </form>
+
+              
             </div>
           </div>
 
