@@ -1,73 +1,94 @@
-// .study-main {
-//   // background: url("../images/kris-atomic-3b2tADGAWnU-unsplash.jpg");
-//   // background-repeat: no-repeat;
-//   // background-size: cover;
-// }
+@use './fonts';
 
-.study-dashboard {
-  display: flex;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: space-between;
+.study-main {
+  background: url("../images/leafy-cafe.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 
-}
 
-.study-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1rem;
-}
+  h1 {
+    font-family: fonts.$pacifico;
+    color: black;
+    font-size: 3rem;
+  }
 
-.study-components {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: .5rem;
-}
+  h2 {
+    font-family: fonts.$raleway;
+    font-weight: 600;
+    color: whitesmoke;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
 
-.left-study-bar {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
+  .study-dashboard {
 
-.centre-study-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  align-self: center;
-}
+    max-height: 50vh;
+    display: flex;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
 
-.timer-component {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  align-self: center;
-}
+  }
 
-.right-study-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-}
+  .study-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
 
-.chat-component {
-  padding-bottom: 1rem;
-}
+  }
 
-.sound-component {
-  display: flex;
-  padding-top: 1rem;
-  justify-content: center;
-}
+  .study-components {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem;
+    align-items: center;
+  }
 
-.timer-contents {
-  padding: 2rem;
+  .left-study-bar {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .centre-study-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .timer-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .right-study-bar {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: flex-end;
+  }
+
+
+  .timer-contents {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
 }

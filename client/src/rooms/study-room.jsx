@@ -1,21 +1,14 @@
-import io from 'socket.io-client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Chat,
   Users,
-  Timer,
-  Notes,
   Sound
 } from "./index";
 import '../styles/app.scss';
-import { Formik } from "formik";
 import {
   Heading,
   Button
 } from "@chakra-ui/react";
-import * as Yup from 'yup';
-import TextField from '../components/TextField';
-import axios from 'axios';
 import Countdown from './timer';
 
 // const socket = io.connect("/");
@@ -78,7 +71,7 @@ export const StudyRoom = (props) => {
 
         <div className="study-header">
           <div>
-            <Heading>Welcome to Aky's Study Room</Heading>
+            <h1>Welcome to Aky's Study Room</h1>
           </div>
           <div>
             <Button type="button" onClick={props.removeUser}>
@@ -90,7 +83,7 @@ export const StudyRoom = (props) => {
         <div className="study-components">
           <div className="left-study-bar">
             <div className="users-component">
-              <Heading size="sm">Study Buddies</Heading>
+              <h2 size="sm">Study Buddies</h2>
               {users}
             </div>
           </div>
@@ -109,7 +102,7 @@ export const StudyRoom = (props) => {
               </div>}
             {!timeSetted &&
               <div>
-               <h1>Study Time</h1>
+               <h2>Study Time</h2>
                 <input
                   placeholder="minutes"
                   onChange = {(event) => {setStudy_time(event.target.value)}}
@@ -118,7 +111,7 @@ export const StudyRoom = (props) => {
                       event.preventDefault();
                     } 
                   }} />
-                  <h1>Break Time</h1>
+                  <h2>Break Time</h2>
                 <input
                   placeholder="minutes"
                   onChange = {(event) => {setBreak_time(event.target.value)}}
@@ -128,8 +121,11 @@ export const StudyRoom = (props) => {
                     }
                    
                   }} />
-                  <button onClick = {()=> {setTimeSetted(true)
-                  console.log(study_time,break_time)}}>SET TIME</button>
+                <Button
+                  colorScheme='whiteAlpha'
+                  onClick={() => {
+                    setTimeSetted(true)
+                  console.log(study_time,break_time)}}>SET TIME</Button>
                     
 
               </div>
@@ -139,14 +135,9 @@ export const StudyRoom = (props) => {
           </div>
 
           <div className="right-study-bar">
-            <div className="chat-component">
               <Chat socket={socket} username={username} room={room} />
-            </div>
 
 
-            <div className="sound-component">
-              <Sound />
-            </div>
           </div>
 
         </div>

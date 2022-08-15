@@ -1,11 +1,6 @@
-// main {
-//   width: 100%;
-//   position: absolute;
-//   padding: 1rem;
-// }
+@use './fonts';
 
-// .nav-header {
-//   z-index: 1;
-//   position: sticky;
-//   width: 100%;
-// }
+p {
+font-family: fonts.$raleway;
+  
+}
