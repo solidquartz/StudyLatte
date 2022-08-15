@@ -17,7 +17,7 @@ import axios from 'axios';
 
 export const CreateRoom = (props) => {
 
-  let navigate = useNavigate();
+  
 
   return (
     <main>
@@ -47,12 +47,12 @@ export const CreateRoom = (props) => {
                   topic: values.topic,
                   description: values.description,
                 }).then((response) => {
-                  console.log(response.data.id);
+                  console.log("new room created",response.data.id)
                   props.setRoom(response.data.id)
                   
-                  props.joinRoom()
+                  
 
-                });
+                }).then(props.joinRoom());
                 
                 
               }}

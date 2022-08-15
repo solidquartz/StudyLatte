@@ -79,22 +79,21 @@ export const JoinRoom = () => {
 
   const joinRoom = () => {
     console.log("joinRoom is working");
-    console.log("roomid ",room)
+
     if (username !== "" && room !== "") {
+      console.log("roomid ",room)
       
       let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-       console.log("resultado", res)
-
         setUsersLists([...res.data])
         setJoinStatus(true)
         setCreatRoomMode(false)
 
+      
+
       })
-    
-     
       
 
     }
