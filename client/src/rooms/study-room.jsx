@@ -5,7 +5,8 @@ import {
 } from "./index";
 import '../styles/app.scss';
 import {
-  Button
+  Button,
+  Input
 } from "@chakra-ui/react";
 import Countdown from './timer';
 import leafyCafe from '../images/leafy-cafe.jpg';
@@ -100,9 +101,9 @@ export const StudyRoom = (props) => {
           <div className="centre-study-box">
 
             {!timeSetted && isAdmin &&
-              <div>
+              <div className="study-timer">
                 <h2>Study Time</h2>
-                <input
+                <Input
                   placeholder="minutes"
                   onChange={(event) => { setStudy_time(event.target.value) }}
                   onKeyPress={(event) => {
@@ -111,7 +112,7 @@ export const StudyRoom = (props) => {
                     }
                   }} />
                 <h2>Break Time</h2>
-                <input
+                <Input
                   placeholder="minutes"
                   onChange={(event) => { setBreak_time(event.target.value) }}
                   onKeyPress={(event) => {

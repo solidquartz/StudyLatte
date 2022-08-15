@@ -1,9 +1,9 @@
 @use './fonts';
 
 .study-main {
-    height: 100vh;
-    position: relative;
-    z-index: 1;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
 
   .study-image {
     height: 100%;
@@ -61,14 +61,32 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: .5rem;
-    align-items: center;
+    align-items: space-between;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 25px;
   }
 
   .left-study-bar {
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    justify-content: space-between;
+    overflow: hidden;
+    max-height: 600px;
+
+
+    h3 {
+      color: white;
+          text-align: center;
+          font-family: fonts.$raleway;
+    }
+
+    .user-bar {
+      display: flex;
+          gap: 10px;
+              justify-content: center;
+    }
   }
 
   .centre-study-box {
@@ -99,6 +117,15 @@
     padding: 2rem;
     display: flex;
     flex-direction: column;
+
+  }
+
+  .study-timer {
+
+    background-color: black;
+    border-radius: 10px;
+    padding: 15px;
+    opacity: .6;
   }
 
 }

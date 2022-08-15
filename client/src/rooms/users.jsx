@@ -15,13 +15,13 @@ export const Users = (props) => {
   return (
     <>
        
-      <Stack direction='column'>
+      <div className="user-bar">
         {/* <Avatar name='Oshigaki Kisame' src='https://bit.ly/broken-link' />
         
         <Avatar name='Sasuke Uchiha' src='https://bit.ly/broken-link' /> */}
         <Avatar src='https://bit.ly/broken-link' />
-      </Stack>
-      <Text>{props.username}</Text>
+      </div>
+      <h3>{props.username}</h3>
     </>
   );
 
