@@ -12,12 +12,16 @@ export const RoomListItem = (props) => {
 
   const handleClick =() => {
     
-    props.setRoom(props.id)
     
+    props.setRoom(props.id)
     props.joinRoom()
     
     
+    
+    
   }
+
+  
  
 
     return (
