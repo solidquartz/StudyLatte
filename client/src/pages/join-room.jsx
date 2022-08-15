@@ -32,8 +32,9 @@ const socket = io.connect("/");
 export const JoinRoom = () => {
 
 
+
   const [searchParams, setSearchParams] = useSearchParams();
-  const [username, setUsername] = useState("initial");
+  const [username, setUsername] = useState("");
   const roomId = searchParams.get("roomId")
   const [room, setRoom] = useState("");
   const [error, setError] = useState("");
@@ -42,6 +43,8 @@ export const JoinRoom = () => {
   const [roomList, setRoomList] = useState([]);
   const [entername_status, setEntername_status] = useState(false);
   const [createRoomMode, setCreatRoomMode] = useState(false)
+  const [inputRoom, setInputRoom] = useState("")
+  console.log("from join -room current room", room);
 
 
 
@@ -49,7 +52,7 @@ export const JoinRoom = () => {
   //   if(!entername_status) {
   //     setEntername_status(true)
   //   }
-    
+
   // },[entername_status])
 
 
@@ -59,15 +62,15 @@ export const JoinRoom = () => {
   useEffect(() => {
     axios.get("/study_rooms").then((response) => {
       setRoomList(response.data);
-      
+
     });
 
-},[])
+  }, [])
 
   // useEffect(() => {
-  
-  
-  
+
+
+
   //   if (roomId) {
   //     // setUsername("Ricardo")
   //     setRoom(roomId)
@@ -76,52 +79,58 @@ export const JoinRoom = () => {
 
   // },[])
 
+  useEffect(() => {
+    joinRoom()
 
-  const joinRoom = () => {
+
+  }, [room])
+
+
+
+  const joinRoom = async () => {
     console.log("joinRoom is working");
-    console.log("roomid ",room)
+    console.log("roomid ", room)
     if (username !== "" && room !== "") {
-      
+
       let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
-      axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-       console.log("resultado", res)
-
+      await axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
         setUsersLists([...res.data])
+
+
+      }).then(() => {
         setJoinStatus(true)
         setCreatRoomMode(false)
-
       })
-    
-     
-      
 
     }
 
   };
 
+
+
   socket.on("update_usersList", (data) => {
-   
+
     const room_id = data.room_id;
     update_usersList(room_id)
-    
+
   });
 
-  const removeUser = ()=> {
+  const removeUser = () => {
     let data = { user: username, room_id: room };
-    
+
     axios.get(`/study_rooms/${room}/leave/${username}`).then(res => {
       setUsersLists([...res.data]);
-      socket.emit("leave-user",data);
+      socket.emit("leave-user", data);
       setJoinStatus(false)
-          
+
     });
-    
+
   };
 
 
-  const update_usersList = function(room_id) {
+  const update_usersList = function (room_id) {
     console.log("axios update working")
     axios.get(`study_rooms/entered_users/${room_id}`)
       .then(res => setUsersLists(res.data));
@@ -136,62 +145,62 @@ export const JoinRoom = () => {
     <main >
 
       {/* our home page */}
-      {!entername_status && <Home setUsername = {setUsername} setEntername_status = {setEntername_status}/> }
-      {createRoomMode && 
-      <CreateRoom  setRoom = {setRoom}
-      joinRoom = {joinRoom}
-      username = {username}
-      setCreatRoomMode = {setCreatRoomMode}
-      />
-      
+      {!entername_status && <Home setUsername={setUsername} setEntername_status={setEntername_status} />}
+      {createRoomMode &&
+        <CreateRoom setRoom={setRoom}
+          joinRoom={joinRoom}
+          username={username}
+          setCreatRoomMode={setCreatRoomMode}
+        />
+
       }
 
       {/* our join-room page */}
-       {!joinStatus && entername_status && !createRoomMode  &&
+      {!joinStatus && entername_status && !createRoomMode &&
         <main>
-          
+
           <div className="joinChatContainer">
-          
+
             <div className="joinChatWrapper">
               <form className="form">
-                
+
                 <div className="input-group">
-                <h1>welcome {username}</h1>
-                  
+                  <h1>welcome {username}</h1>
+
                   <h3>Join a Study Room</h3>
-                  
-          
+
+
 
                   <input
                     type="text"
                     placeholder="Room ID"
                     onChange={(event) => {
-                      setRoom(event.target.value);
+                      setInputRoom(event.target.value);
                     }}
                   />
                 </div>
-                <div><Button onClick={joinRoom} colorScheme='cyan' size='md'>Join Room</Button>
-                <br />
-                <br />
-                <p>or do you want to create new room?&nbsp; </p>
+                <div><Button onClick={()=>setRoom(inputRoom)} colorScheme='cyan' size='md'>Join Room</Button>
+                  <br />
+                  <br />
+                  <p>or do you want to create new room?&nbsp; </p>
 
-      
-                  
-                 <Button  colorScheme='cyan' size='md' onClick={()=>setCreatRoomMode(true)}>Create Room</Button></div>
-                
+
+
+                  <Button colorScheme='cyan' size='md' onClick={() => setCreatRoomMode(true)}>Create Room</Button></div>
+
               </form>
             </div>
 
           </div>
           <ul>
-           {roomList.map(studyroom=> <RoomListItem key= {studyroom.id} {...studyroom}   
-                                                  setRoom = {setRoom}
-                                                  joinRoom = {joinRoom}
-                                                  username = {username}
+            {roomList.map(studyroom => <RoomListItem key={studyroom.id} {...studyroom}
+              setRoom={setRoom}
+              joinRoom={joinRoom}
+              username={username}
 
-                                                  />)}
+            />)}
 
-           </ul>
+          </ul>
 
 
         </main>
