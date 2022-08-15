@@ -40,6 +40,7 @@ export const JoinRoom = () => {
   const [joinStatus, setJoinStatus] = useState(false);
   const [roomList, setRoomList] = useState([]);
   const [entername_status, setEntername_status] = useState(false);
+  const [createRoomMode, setCreatRoomMode] = useState(false)
 
 
 
@@ -131,27 +132,25 @@ export const JoinRoom = () => {
   return (
 
     <main >
-      {!entername_status && <Home setUsername = {setUsername} setEntername_status = {setEntername_status}/>       }
 
-      
-      {!joinStatus && entername_status  &&
+      {/* our home page */}
+      {!entername_status && <Home setUsername = {setUsername} setEntername_status = {setEntername_status}/> }
+
+      {/* our join-room page */}
+       {!joinStatus && entername_status  &&
         <main>
-    <h1>welcome {username}</h1>
+          
           <div className="joinChatContainer">
+          
             <div className="joinChatWrapper">
               <form className="form">
                 
                 <div className="input-group">
+                <h1>welcome {username}</h1>
                   
                   <h3>Join a Study Room</h3>
                   
-                  <input
-                    type="text"
-                    
-                    onChange={(event) => {
-                      setUsername(event.target.value);
-                    }}
-                  />
+          
 
                   <input
                     type="text"
@@ -161,9 +160,14 @@ export const JoinRoom = () => {
                     }}
                   />
                 </div>
+                <div><Button onClick={joinRoom} colorScheme='cyan' size='md'>Join Room</Button>
+                <br />
+                <br />
+                <p>or do you want to create new room?&nbsp; </p>
 
-
-                  <Button onClick={joinRoom} colorScheme='cyan' size='md'>Join Room</Button>
+      
+                  
+                 <Button  colorScheme='cyan' size='md'>Create Room</Button></div>
                 
               </form>
             </div>
