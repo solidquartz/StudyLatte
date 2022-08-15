@@ -24,6 +24,7 @@ import { StudyRoom } from '../rooms';
 import { RoomListItem } from '../components/RoomListItem';
 import { useLocation } from 'react-router-dom';
 import { Home } from '../pages/home';
+import { CreateRoom } from './create-room';
 
 const socket = io.connect("/");
 
@@ -89,6 +90,7 @@ export const JoinRoom = () => {
 
         setUsersLists([...res.data])
         setJoinStatus(true)
+        setCreatRoomMode(false)
 
       })
     
@@ -135,9 +137,17 @@ export const JoinRoom = () => {
 
       {/* our home page */}
       {!entername_status && <Home setUsername = {setUsername} setEntername_status = {setEntername_status}/> }
+      {createRoomMode && 
+      <CreateRoom  setRoom = {setRoom}
+      joinRoom = {joinRoom}
+      username = {username}
+      setCreatRoomMode = {setCreatRoomMode}
+      />
+      
+      }
 
       {/* our join-room page */}
-       {!joinStatus && entername_status  &&
+       {!joinStatus && entername_status && !createRoomMode  &&
         <main>
           
           <div className="joinChatContainer">
@@ -167,7 +177,7 @@ export const JoinRoom = () => {
 
       
                   
-                 <Button  colorScheme='cyan' size='md'>Create Room</Button></div>
+                 <Button  colorScheme='cyan' size='md' onClick={()=>setCreatRoomMode(true)}>Create Room</Button></div>
                 
               </form>
             </div>
@@ -177,7 +187,9 @@ export const JoinRoom = () => {
            {roomList.map(studyroom=> <RoomListItem key= {studyroom.id} {...studyroom}   
                                                   setRoom = {setRoom}
                                                   joinRoom = {joinRoom}
-                                                  username = {username}/>)}
+                                                  username = {username}
+
+                                                  />)}
 
            </ul>
 
@@ -185,7 +197,7 @@ export const JoinRoom = () => {
         </main>
       }
 
-      {joinStatus && entername_status && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
+      {joinStatus && entername_status && !createRoomMode && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
 
 
 

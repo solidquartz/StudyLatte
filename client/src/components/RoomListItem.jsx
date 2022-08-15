@@ -47,6 +47,15 @@ export const RoomListItem = (props) => {
           >
             {props.description}
           </Box>
+          <Box
+            mt='1'
+            fontWeight='semibold'
+            as='h4'
+            lineHeight='tight'
+            noOfLines={3}
+          >
+            ID:{props.id}
+          </Box>
 
           <Box as='span' ml='2' color='gray.600' fontSize='sm'>
             {props.entered_users.length}
