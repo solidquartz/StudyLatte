@@ -47,6 +47,7 @@ export const Home = (props) => {
           <div className="enter-container">
 
             <div className="enter-wrapper">
+            <form action="" className="form">
               
                 <h3>Enter Username</h3>
                 <div className="input-group">
@@ -60,6 +61,7 @@ export const Home = (props) => {
                   </Button>
                   {errorMessage && <h2>{errorMessage}</h2>}
                 </div>
+                </form>
 
               
             </div>
