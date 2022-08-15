@@ -22,21 +22,38 @@ import TextField from '../components/TextField';
 import axios from 'axios';
 import { StudyRoom } from '../rooms';
 import { RoomListItem } from '../components/RoomListItem';
+import { useLocation } from 'react-router-dom';
+import { Home } from '../pages/home';
 
 const socket = io.connect("/");
 
 
 export const JoinRoom = () => {
+
+
   const [searchParams, setSearchParams] = useSearchParams();
-  const [username, setUsername] = useState("Ricardo");
+  const [username, setUsername] = useState("initial");
   const roomId = searchParams.get("roomId")
-  const [room, setRoom] = useState(roomId);
+  const [room, setRoom] = useState("");
   const [error, setError] = useState("");
   const [usersList, setUsersLists] = useState([]);
   const [joinStatus, setJoinStatus] = useState(false);
-  
   const [roomList, setRoomList] = useState([]);
-  
+  const [entername_status, setEntername_status] = useState(false);
+
+
+
+  // useEffect(()=> {
+  //   if(!entername_status) {
+  //     setEntername_status(true)
+  //   }
+    
+  // },[entername_status])
+
+
+
+
+
   useEffect(() => {
     axios.get("/study_rooms").then((response) => {
       setRoomList(response.data);
@@ -45,21 +62,22 @@ export const JoinRoom = () => {
 
 },[])
 
-  useEffect(() => {
+  // useEffect(() => {
   
-  console.log(roomId)
   
-    if (roomId) {
-      setUsername("Ricardo")
-      setRoom(roomId)
-      joinRoom()
-    }
+  
+  //   if (roomId) {
+  //     // setUsername("Ricardo")
+  //     setRoom(roomId)
+  //     joinRoom()
+  //   }
 
-  },[])
+  // },[])
 
 
   const joinRoom = () => {
     console.log("joinRoom is working");
+    console.log("roomid ",room)
     if (username !== "" && room !== "") {
       
       let data = { user: username, room_id: room };
@@ -72,7 +90,7 @@ export const JoinRoom = () => {
         setJoinStatus(true)
 
       })
-      // .then(()=>{axios.get('/sockets/add').then(())})
+    
      
       
 
@@ -108,30 +126,17 @@ export const JoinRoom = () => {
 
 
 
-  // useEffect(() => {
-  //   window.addEventListener('beforeunload', alertUser);
-  //   window.addEventListener('unload', handleTabClosing);
-  //   return () => {
-  //     window.removeEventListener('beforeunload', alertUser);
-  //     window.removeEventListener('unload', handleTabClosing);
-  //   };
-  // });
 
-  // const handleTabClosing = () => {
-  //   removeUser();
-  // };
-
-  // const alertUser = (event) => {
-  //   event.preventDefault();
-  //   event.returnValue = 'Are you sure?';
-  // };
 
   return (
 
     <main >
-      {!joinStatus &&
-        <main>
+      {!entername_status && <Home setUsername = {setUsername} setEntername_status = {setEntername_status}/>       }
 
+      
+      {!joinStatus && entername_status  &&
+        <main>
+    <h1>welcome {username}</h1>
           <div className="joinChatContainer">
             <div className="joinChatWrapper">
               <form className="form">
@@ -139,6 +144,7 @@ export const JoinRoom = () => {
                 <div className="input-group">
                   
                   <h3>Join a Study Room</h3>
+                  
                   <input
                     type="text"
                     
@@ -150,11 +156,12 @@ export const JoinRoom = () => {
                   <input
                     type="text"
                     placeholder="Room ID"
-                    // onChange={(event) => {
-                    //   setRoom(event.target.value);
-                    // }}
+                    onChange={(event) => {
+                      setRoom(event.target.value);
+                    }}
                   />
                 </div>
+
 
                   <Button onClick={joinRoom} colorScheme='cyan' size='md'>Join Room</Button>
                 
@@ -163,7 +170,10 @@ export const JoinRoom = () => {
 
           </div>
           <ul>
-           {roomList.map(studyroom=> <RoomListItem key= {studyroom.id} {...studyroom}/>)}
+           {roomList.map(studyroom=> <RoomListItem key= {studyroom.id} {...studyroom}   
+                                                  setRoom = {setRoom}
+                                                  joinRoom = {joinRoom}
+                                                  username = {username}/>)}
 
            </ul>
 
@@ -171,7 +181,7 @@ export const JoinRoom = () => {
         </main>
       }
 
-      {joinStatus && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
+      {joinStatus && entername_status && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
 
 
 

@@ -2,12 +2,21 @@ import {
   Box,
   Button
 } from '@chakra-ui/react';
+import { wrapHandler } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 
 
 
 
 export const RoomListItem = (props) => {
+
+  const handleClick =() => {
+    
+    props.setRoom(props.id)
+    
+    props.joinRoom()
+    
+  }
  
 
     return (
@@ -41,19 +50,20 @@ export const RoomListItem = (props) => {
           <Box as='span' ml='2' color='gray.600' fontSize='sm'>
             {props.entered_users.length}
 
-           <a href={`/join-room?roomId=${props.id}`}>
+           {/* <a href={`/join-room?roomId=${props.id}`}> */}
             <Button
               as="button"
               variant="ghost"
               aria-label="join-room"
               my={5}
               w="100%"
+              onClick={handleClick}
             >
               Join Room
 
            </Button>
            
-           </a>
+           {/* </a> */}
 
           </Box>
 
