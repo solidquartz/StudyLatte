@@ -3,10 +3,14 @@ import {
   Button,
 } from '@chakra-ui/react';
 import '../styles/app.scss';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
+import { useState } from 'react';
 
 
 
-export const Home = () => {
+export const Home = (props) => {
+  const setUsername = props.setUsername
+  const setEntername_status = props.setEntername_status
 
   return (
     <main className="home-bg">
@@ -25,11 +29,11 @@ export const Home = () => {
               <form action="" className="form">
                 <h3>Enter Username</h3>
                 <div className="input-group">
-                  <input type='text'/>
+                  <input type='text' onChange={(e)=>setUsername(e.target.value)}/>
                 </div>
 
                 <div className="input-group">
-                  <Button colorScheme='blackAlpha' size="lg">Come in!
+                  <Button colorScheme='blackAlpha' size="lg" onClick={()=>setEntername_status(true)}>Come in!
                   </Button>
                 </div>
               </form>

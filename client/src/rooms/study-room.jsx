@@ -31,6 +31,7 @@ export const StudyRoom = (props) => {
   
 
 
+
   const startTimer = function () {
     const data = { room: room, study_time: study_time*60, break_time: break_time*60 }
     socket.emit("start-timer", data)
