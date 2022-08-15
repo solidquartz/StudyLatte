@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Chat,
   Users,
@@ -10,6 +10,7 @@ import {
   Button
 } from "@chakra-ui/react";
 import Countdown from './timer';
+import axios from 'axios';
 
 // const socket = io.connect("/");
 
@@ -22,18 +23,30 @@ export const StudyRoom = (props) => {
   const socket = props.socket
   const usersList = props.usersList
   const room = props.room
+  const setUsersLists = props.setUsersLists
 
   const [time, setTime] = useState(0)
   const [study_status, setStudyStaus] = useState("Not started yet....")
   const [timeSetted, setTimeSetted] = useState(false)
   const [study_time, setStudy_time] = useState(0)
   const [break_time, setBreak_time] = useState(0)
+  const [isAdmin, setisAdmin] = useState(false);
+  const [title, setTitle] = useState("")
   
+
+  useEffect(() => {
+    if (usersList[0] === username) {
+      setisAdmin(true)
+    }
+
+
+  }, [setUsersLists])
+
 
 
 
   const startTimer = function () {
-    const data = { room: room, study_time: study_time*60, break_time: break_time*60 }
+    const data = { room: room, study_time: study_time * 60, break_time: break_time * 60 }
     socket.emit("start-timer", data)
 
   }
@@ -89,53 +102,74 @@ export const StudyRoom = (props) => {
           </div>
 
           <div className="centre-study-box">
-            {timeSetted &&
+
+            {!timeSetted && isAdmin &&
               <div>
-                <Countdown
-                  study_status={study_status}
-                  room={room}
-                  username={username}
-                  socket={socket}
-                  time={time}
-                  onClick={startTimer}
-                />
-              </div>}
-            {!timeSetted &&
-              <div>
-               <h2>Study Time</h2>
+                <h2>Study Time</h2>
                 <input
                   placeholder="minutes"
-                  onChange = {(event) => {setStudy_time(event.target.value)}}
-                  onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    } 
-                  }} />
-                  <h2>Break Time</h2>
-                <input
-                  placeholder="minutes"
-                  onChange = {(event) => {setBreak_time(event.target.value)}}
+                  onChange={(event) => { setStudy_time(event.target.value) }}
                   onKeyPress={(event) => {
                     if (!/[0-9]/.test(event.key)) {
                       event.preventDefault();
                     }
-                   
                   }} />
+                <h2>Break Time</h2>
+                <input
+                  placeholder="minutes"
+                  onChange={(event) => { setBreak_time(event.target.value) }}
+                  onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+
+                  }} />
+
                 <Button
                   colorScheme='whiteAlpha'
                   onClick={() => {
                     setTimeSetted(true)
-                  console.log(study_time,break_time)}}>SET TIME</Button>
-                    
+                    console.log(study_time, break_time)
+                  }}>SET TIME</Button>
 
               </div>
 
 
             }
+
+            {timeSetted && isAdmin && <div>
+              <Countdown
+                study_status={study_status}
+                room={room}
+                username={username}
+                socket={socket}
+                time={time}
+                onClick={startTimer}
+                isAdmin = {isAdmin}
+              />
+            </div>
+            }
+
+            {!isAdmin && <div>
+              <Countdown
+                study_status={study_status}
+                room={room}
+                username={username}
+                socket={socket}
+                time={time}
+                onClick={startTimer}
+                isAdmin = {isAdmin}
+              />
+            </div>}
+
+
+
+
+
           </div>
 
           <div className="right-study-bar">
-              <Chat socket={socket} username={username} room={room} />
+            <Chat socket={socket} username={username} room={room} />
 
 
           </div>
