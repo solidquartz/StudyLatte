@@ -179,7 +179,8 @@ export const JoinRoom = () => {
             </div>
 
           </div>
-          <ul>
+          <div className="room-list">
+
             {roomList.map(studyroom => <RoomListItem key={studyroom.id} {...studyroom}
               setRoom={setRoom}
               joinRoom={joinRoom}
@@ -187,7 +188,8 @@ export const JoinRoom = () => {
 
             />)}
 
-          </ul>
+
+          </div>
 
 
         </main>

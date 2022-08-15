@@ -4,24 +4,19 @@ import {
 } from '@chakra-ui/react';
 import { wrapHandler } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
+import "../styles/app.scss"
 
 export const RoomListItem = (props) => {
 
   const handleClick =() => {
-    
-    
     props.setRoom(props.id)
     props.joinRoom()
-    
-    
-    
-    
   }
 
-  
- 
 
-    return (
+  return (
+      
+    <div className='room-list-item'>
       <Box maxW='md' borderWidth='2px' borderRadius='lg' overflow='hidden'>
         <Box p='6'>
 
@@ -81,7 +76,7 @@ export const RoomListItem = (props) => {
         </Box>
       </Box>
 
-
+    </div>
 
 
 
