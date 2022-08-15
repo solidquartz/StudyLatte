@@ -67,10 +67,7 @@ export const JoinRoom = () => {
   useEffect(() => {
     joinRoom();
 
-
   }, [room]);
-
-
 
   const joinRoom = async () => {
     console.log("joinRoom is working");
@@ -83,17 +80,12 @@ export const JoinRoom = () => {
       await axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
         setUsersLists([...res.data]);
 
-
       }).then(() => {
         setJoinStatus(true);
         setCreatRoomMode(false);
       });
-
     }
-
   };
-
-
 
   socket.on("update_usersList", (data) => {
 
@@ -109,11 +101,8 @@ export const JoinRoom = () => {
       setUsersLists([...res.data]);
       socket.emit("leave-user", data);
       setJoinStatus(false);
-
     });
-
   };
-
 
   const update_usersList = function(room_id) {
     console.log("axios update working");
@@ -122,13 +111,9 @@ export const JoinRoom = () => {
   };
 
 
-
-
-
   return (
 
-    <main >
-
+    <main>
       {/* our home page */}
       {!entername_status && <Home setUsername={setUsername} setEntername_status={setEntername_status} />}
       {createRoomMode &&
@@ -154,8 +139,6 @@ export const JoinRoom = () => {
 
                   <h3>Join a Study Room</h3>
 
-
-
                   <input
                     type="text"
                     placeholder="Room ID"
@@ -177,28 +160,21 @@ export const JoinRoom = () => {
 
               </form>
             </div>
-
           </div>
+
           <div className="room-list">
 
             {roomList.map(studyroom => <RoomListItem key={studyroom.id} {...studyroom}
               setRoom={setRoom}
               joinRoom={joinRoom}
               username={username}
-
             />)}
 
-
           </div>
-
-
         </main>
       }
 
       {joinStatus && entername_status && !createRoomMode && <StudyRoom socket={socket} username={username} usersList={usersList} room={room} removeUser={removeUser} />}
-
-
-
 
     </main>
   );
