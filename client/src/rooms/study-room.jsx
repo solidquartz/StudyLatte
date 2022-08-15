@@ -32,15 +32,27 @@ export const StudyRoom = (props) => {
   const [break_time, setBreak_time] = useState(0)
   const [isAdmin, setisAdmin] = useState(false);
   const [title, setTitle] = useState("")
+  const [total, setTotal] = useState("")
   
+  
+  axios.get(`/study_rooms/room_info/${room}`).then(res => {
+    setTitle(res.data.title)
+    console.log(res.data.title)
+  })
+
+
 
   useEffect(() => {
     if (usersList[0] === username) {
       setisAdmin(true)
     }
 
+    
+
 
   }, [setUsersLists])
+
+ 
 
 
 
@@ -84,9 +96,10 @@ export const StudyRoom = (props) => {
 
         <div className="study-header">
           <div>
-            <h1>Welcome to Aky's Study Room</h1>
+            <h1>{title}</h1>
           </div>
           <div>
+            <h2>Hey {username}, you are in roomID {room}</h2>
             <Button type="button" onClick={props.removeUser}>
               Leave Room
             </Button>
@@ -96,7 +109,7 @@ export const StudyRoom = (props) => {
         <div className="study-components">
           <div className="left-study-bar">
             <div className="users-component">
-              <h2 size="sm">Study Buddies</h2>
+              <h2 size="sm">Study Buddies </h2>
               {users}
             </div>
           </div>
