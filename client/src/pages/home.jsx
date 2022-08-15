@@ -53,7 +53,7 @@ export const Home = (props) => {
             </div>
 
           </div>
-
+          <a href='https://github.com/solidquartz/StudyLatte'><p align="center">Check us out on Github</p></a>
 
         </div>
       </div>

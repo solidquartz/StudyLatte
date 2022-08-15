@@ -11,6 +11,7 @@ import { RoomListItem } from '../components/RoomListItem';
 import { Home } from '../pages/home';
 import { CreateRoom } from './create-room';
 
+
 const socket = io.connect("/");
 
 
@@ -113,7 +114,7 @@ export const JoinRoom = () => {
 
   return (
 
-    <main>
+    <main className='home-bg'>
       {/* our home page */}
       {!entername_status && <Home setUsername={setUsername} setEntername_status={setEntername_status} />}
       {createRoomMode &&

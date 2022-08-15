@@ -2,25 +2,34 @@ import {
   Box,
   Button
 } from '@chakra-ui/react';
-import { wrapHandler } from 'framer-motion';
-import { Link as RouterLink } from 'react-router-dom';
-import "../styles/app.scss"
+import "../styles/app.scss";
 
 export const RoomListItem = (props) => {
 
-  const handleClick =() => {
-    props.setRoom(props.id)
-    props.joinRoom()
-  }
+  const handleClick = () => {
+    props.setRoom(props.id);
+    props.joinRoom();
+  };
 
 
   return (
-      
-    <div className='room-list-item'>
-      <Box maxW='md' borderWidth='2px' borderRadius='lg' overflow='hidden'>
-        <Box p='6'>
 
-          <Box display='flex' alignItems='baseline'> {props.title}
+    <div className='room-list-item'>
+      <Box
+        maxW='md'
+        borderWidth='5px'
+        borderRadius='lg'
+        overflow='hidden'
+        bg="white"
+      >
+
+        <Box p='6'>
+          <Box
+            display='flex'
+            alignItems='baseline'
+            fontWeight="bold"
+          >
+            {props.title}
           </Box>
 
           <Box
@@ -31,35 +40,42 @@ export const RoomListItem = (props) => {
             textTransform='uppercase'
             ml='2'
           >
-            {props.topic}
+            Topic: {props.topic}
           </Box>
 
           <Box
             mt='1'
-            fontWeight='semibold'
+            fontSize="md"
             as='h4'
             lineHeight='tight'
             noOfLines={3}
           >
             {props.description}
           </Box>
+
           <Box
             mt='1'
             fontWeight='semibold'
+            fontSize="xs"
             as='h4'
             lineHeight='tight'
-            noOfLines={3}
+            noOfLines={1}
           >
-            ID:{props.id}
+            Room ID:{props.id}
           </Box>
 
-          <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            {props.entered_users.length}
+          <Box
+            as='span'
+            ml='2'
+            color='gray.600'
+            fontSize='sm'>
+            {props.entered_users.length} users studying
 
-           {/* <a href={`/join-room?roomId=${props.id}`}> */}
+            {/* <a href={`/join-room?roomId=${props.id}`}> */}
             <Button
               as="button"
-              variant="ghost"
+              colorScheme='cyan'
+              variant="outline"
               aria-label="join-room"
               my={5}
               w="100%"
@@ -67,9 +83,9 @@ export const RoomListItem = (props) => {
             >
               Join Room
 
-           </Button>
-           
-           {/* </a> */}
+            </Button>
+
+            {/* </a> */}
 
           </Box>
 
@@ -80,6 +96,6 @@ export const RoomListItem = (props) => {
 
 
 
-    )
-  
-}
+  );
+
+};

@@ -2,20 +2,18 @@ import { useState } from 'react';
 import {
   Chat,
   Users,
-  Sound
 } from "./index";
 import '../styles/app.scss';
 import {
-  Heading,
   Button
 } from "@chakra-ui/react";
 import Countdown from './timer';
+import leafyCafe from '../images/leafy-cafe.jpg';
 
 // const socket = io.connect("/");
 
 
 export const StudyRoom = (props) => {
-
 
 
   const username = props.username
@@ -24,13 +22,11 @@ export const StudyRoom = (props) => {
   const room = props.room
 
   const [time, setTime] = useState(0)
-  const [study_status, setStudyStaus] = useState("Not started yet....")
+  const [study_status, setStudyStaus] = useState("Getting ready to study...")
   const [timeSetted, setTimeSetted] = useState(false)
   const [study_time, setStudy_time] = useState(0)
   const [break_time, setBreak_time] = useState(0)
   
-
-
 
   const startTimer = function () {
     const data = { room: room, study_time: study_time*60, break_time: break_time*60 }
@@ -42,16 +38,15 @@ export const StudyRoom = (props) => {
     if (data.room === room) {
       setTime(data.time)
     }
-
   })
 
   socket.on("update-study_stauts", (data) => {
     if (data.room === room) {
       if (data.study_status === true) {
-        setStudyStaus("📚Study Time📚")
+        setStudyStaus("📚 Study Time 📚")
       }
       else if (data.study_status === false) {
-        setStudyStaus("☕️Break Time☕️")
+        setStudyStaus("☕️ Break Time ☕️")
       }
     }
   })
@@ -66,12 +61,13 @@ export const StudyRoom = (props) => {
   return (
 
     <main className='study-main'>
+      <img src={leafyCafe} alt="leafy cafe" className="study-image" />
 
       <div className="study-dashboard">
 
         <div className="study-header">
           <div>
-            <h1>Welcome to Aky's Study Room</h1>
+            <h1>Welcome to (Insert Room Name)</h1>
           </div>
           <div>
             <Button type="button" onClick={props.removeUser}>
