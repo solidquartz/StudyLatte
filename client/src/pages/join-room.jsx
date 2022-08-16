@@ -30,8 +30,9 @@ export const JoinRoom = () => {
   const [entername_status, setEntername_status] = useState(false);
   const [createRoomMode, setCreatRoomMode] = useState(false);
   const [inputRoom, setInputRoom] = useState("");
- 
+  
 
+ 
 
 useEffect(()=> {
   setError("")
@@ -67,8 +68,8 @@ const validCheck = ()=> {
       else if(res.data.entered_users.length < 7) {
         console.log("available")
          setError("")
-         setRoom(inputRoom)
-         joinRoom()
+         setRoom(parseInt(inputRoom))
+        //  joinRoom()
          
 
       } 
@@ -85,7 +86,7 @@ const validCheck = ()=> {
 
   }, [room]);
 
-  const joinRoom = async () => {
+  const joinRoom =  () => {
     console.log("joinRoom is working");
     console.log("roomid ", room);
     if (username !== "" && room !== "") {
@@ -93,8 +94,8 @@ const validCheck = ()=> {
       let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
-      await axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        setUsersLists([...res.data]);
+       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
+        setUsersLists(res.data);
 
       }).then(() => {
         setJoinStatus(true);

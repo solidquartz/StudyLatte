@@ -50,7 +50,7 @@ export const CreateRoom = (props) => {
                   console.log("created",response.data.id);
                   props.setRoom(response.data.id)
                   
-                  props.joinRoom()
+                  // props.joinRoom()
 
                 });
                 
