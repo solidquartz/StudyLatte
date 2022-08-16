@@ -92,7 +92,7 @@ export const StudyRoom = (props) => {
           </div>
           <div>
             <Button type="button" onClick={props.removeUser}>
-              Leave Room
+              Leave Room ID: {room}
             </Button>
           </div>
         </div>
