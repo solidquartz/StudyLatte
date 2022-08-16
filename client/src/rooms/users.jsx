@@ -21,7 +21,7 @@ export const Users = (props) => {
 
 let randomAvatar = Math.floor(Math.random() * avatarImages.length);
 let pic = avatarImages[randomAvatar]
-setPicture(picture);
+setPicture(pic);
 
   },[]);
 
