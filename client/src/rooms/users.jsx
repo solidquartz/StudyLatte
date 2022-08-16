@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
  console.log(avatarImages)
 
 export const Users = (props) => {
-  // create a state (avatarIMages source) - picture, setPicture (empty string)
+
   const [picture, setPicture] = useState("")
 
   useEffect(()=>{
@@ -24,11 +24,6 @@ let pic = avatarImages[randomAvatar]
 setPicture(pic);
 
   },[]);
-
-  //useEffect (once) - second time - dependecy arr
- 
-//   let randomAvatar = Math.floor(Math.random() * avatarImages.length);
-// let picture = avatarImages[randomAvatar]
 
 
   return (
