@@ -20,8 +20,9 @@ export const Users = (props) => {
   useEffect(()=>{
 
 let randomAvatar = Math.floor(Math.random() * avatarImages.length);
-let picture = avatarImages[randomAvatar]
+let pic = avatarImages[randomAvatar]
 setPicture(picture);
+
   },[]);
 
   //useEffect (once) - second time - dependecy arr
