@@ -15,6 +15,7 @@ import {
 export const Users = (props) => {
   
   let randomAvatar = Math.floor(Math.random() * avatarImages.length);
+  
   let picture = avatarImages[randomAvatar]
 
   return (
