@@ -2,21 +2,21 @@ import { useEffect, useState } from 'react';
 import {
   Chat,
   Users,
-  Sound
 } from "./index";
 import '../styles/app.scss';
 import {
-  Heading,
-  Button
+  Button,
+  Input
 } from "@chakra-ui/react";
 import Countdown from './timer';
+import leafyCafe from '../images/leafy-cafe.jpg';
 import axios from 'axios';
+
 
 // const socket = io.connect("/");
 
 
 export const StudyRoom = (props) => {
-
 
 
   const username = props.username
@@ -26,7 +26,7 @@ export const StudyRoom = (props) => {
   const setUsersLists = props.setUsersLists
 
   const [time, setTime] = useState(0)
-  const [study_status, setStudyStaus] = useState("Not started yet....")
+  const [study_status, setStudyStaus] = useState("Getting ready to study...")
   const [timeSetted, setTimeSetted] = useState(false)
   const [study_time, setStudy_time] = useState(0)
   const [break_time, setBreak_time] = useState(0)
@@ -34,27 +34,18 @@ export const StudyRoom = (props) => {
   const [title, setTitle] = useState("")
   const [total, setTotal] = useState("")
   
-  
+
   axios.get(`/study_rooms/room_info/${room}`).then(res => {
     setTitle(res.data.title)
     console.log(res.data.title)
   })
-
-
 
   useEffect(() => {
     if (usersList[0] === username) {
       setisAdmin(true)
     }
 
-    
-
-
-  }, [setUsersLists])
-
- 
-
-
+  }, [setUsersLists, username, usersList])
 
 
   const startTimer = function () {
@@ -67,16 +58,15 @@ export const StudyRoom = (props) => {
     if (data.room === room) {
       setTime(data.time)
     }
-
   })
 
   socket.on("update-study_stauts", (data) => {
     if (data.room === room) {
       if (data.study_status === true) {
-        setStudyStaus("📚Study Time📚")
+        setStudyStaus("📚 Study Time 📚")
       }
       else if (data.study_status === false) {
-        setStudyStaus("☕️Break Time☕️")
+        setStudyStaus("☕️ Break Time ☕️")
       }
     }
   })
@@ -91,15 +81,16 @@ export const StudyRoom = (props) => {
   return (
 
     <main className='study-main'>
+      <img src={leafyCafe} alt="leafy cafe" className="study-image" />
 
       <div className="study-dashboard">
 
         <div className="study-header">
+
           <div>
-            <h1>{title}</h1>
+            <h1>Hey {username}, welcome to {title}</h1>
           </div>
           <div>
-            <h2>Hey {username}, you are in roomID {room}</h2>
             <Button type="button" onClick={props.removeUser}>
               Leave Room
             </Button>
@@ -109,7 +100,7 @@ export const StudyRoom = (props) => {
         <div className="study-components">
           <div className="left-study-bar">
             <div className="users-component">
-              <h2 size="sm">Study Buddies </h2>
+              <h2>Study Buddies </h2>
               {users}
             </div>
           </div>
@@ -117,9 +108,9 @@ export const StudyRoom = (props) => {
           <div className="centre-study-box">
 
             {!timeSetted && isAdmin &&
-              <div>
+              <div className="study-timer">
                 <h2>Study Time</h2>
-                <input
+                <Input
                   placeholder="minutes"
                   onChange={(event) => { setStudy_time(event.target.value) }}
                   onKeyPress={(event) => {
@@ -128,7 +119,7 @@ export const StudyRoom = (props) => {
                     }
                   }} />
                 <h2>Break Time</h2>
-                <input
+                <Input
                   placeholder="minutes"
                   onChange={(event) => { setBreak_time(event.target.value) }}
                   onKeyPress={(event) => {

@@ -46,7 +46,7 @@ export const Chat = ({ socket, username, room }) => {
 
     <div className="chat-window">
       <div className='chat-header'>
-        <p> Study chat</p>
+        <p>Cafe Lounge</p>
       </div>
 
 

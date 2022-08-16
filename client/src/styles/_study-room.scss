@@ -1,11 +1,20 @@
 @use './fonts';
 
 .study-main {
-  background: url("../images/leafy-cafe.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 100vh;
+  position: relative;
+  z-index: 1;
 
+  .study-image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+    opacity: .8;
+    left: 0;
+    top: 0;
+
+  }
 
   h1 {
     font-family: fonts.$pacifico;
@@ -36,6 +45,7 @@
     width: 100%;
     height: 100%;
     justify-content: space-between;
+    position: relative;
 
   }
 
@@ -44,6 +54,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 1rem;
+    align-items: center;
 
   }
 
@@ -51,14 +62,33 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: .5rem;
-    align-items: center;
+    align-items: space-between;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 650px;
   }
 
   .left-study-bar {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    
+    justify-content: space-between;
+    overflow: hidden;
+    max-height: 600px;
+
+
+    h3 {
+      color: white;
+          text-align: center;
+          font-family: fonts.$raleway;
+    }
+
+    .user-bar {
+      display: flex;
+      padding: 5px;
+              justify-content: center;
+    }
   }
 
   .centre-study-box {
@@ -81,7 +111,8 @@
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
   }
 
 
@@ -89,6 +120,15 @@
     padding: 2rem;
     display: flex;
     flex-direction: column;
+
+  }
+
+  .study-timer {
+
+    background-color: black;
+    border-radius: 10px;
+    padding: 15px;
+    opacity: .6;
   }
 
 }

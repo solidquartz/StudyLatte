@@ -24,7 +24,7 @@ export const Home = (props) => {
     if(response.data === "User already exists!") {
       setErrorMessage(response.data)
     } else { 
-      setUsername(setInputUsername);
+      setUsername(input_username);
       setEntername_status(true);
     }
   })
@@ -80,7 +80,7 @@ export const Home = (props) => {
             </div>
 
           </div>
-
+          <a href='https://github.com/solidquartz/StudyLatte'><p align="center">Check us out on Github</p></a>
 
         </div>
       </div>

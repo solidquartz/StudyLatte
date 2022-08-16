@@ -11,6 +11,7 @@ import { RoomListItem } from '../components/RoomListItem';
 import { Home } from '../pages/home';
 import { CreateRoom } from './create-room';
 
+
 const socket = io.connect("/");
 
 
@@ -46,21 +47,29 @@ useEffect(()=> {
 
   }, []);
 
-const validCheck = function(room_id) {
+const validCheck = ()=> {
   console.log("validworks")
+  console.log("inputroom",inputRoom)
   
-  axios.get(`/study_rooms/room_info/${room_id}`).then(res => {
-    console.log("res", res.data)
+  axios.get(`/study_rooms/room_info/${inputRoom}`).then(res => {
+    console.log("res", res)
+    
     if(res.data.error) {
-      return setError(`${res.data.error}...`)
+       setError(`${res.data.error}...`)
     }
-    else if(!res.data.error) {
+    
+    
+    else {
+      console.log("length", res.data.entered_users.length)
+      
       if(res.data.entered_users.length >= 7) {
-        return setError("this room is currently full...")}
-      else if(res.data.entered_users >=0 && res.data.entered_users < 7) {
+        setError("this room is currently full...")}
+      else if(res.data.entered_users.length < 7) {
+        console.log("available")
          setError("")
-         setRoom(room_id)
-         return true
+         setRoom(inputRoom)
+         joinRoom()
+         
 
       } 
 
@@ -120,7 +129,7 @@ const validCheck = function(room_id) {
 
   return (
 
-    <main>
+    <main className='home-bg'>
       {/* our home page */}
       {!entername_status && <Home setUsername={setUsername} setEntername_status={setEntername_status} />}
       {createRoomMode &&
@@ -161,11 +170,9 @@ const validCheck = function(room_id) {
                   />
                   {error && <p>{error}</p>}
                 </div>
-                <div><Button onClick={() => {
-                  validCheck(inputRoom)
-                  
-                  
-                } 
+                <div><Button onClick={ 
+                  // setRoom(inputRoom)
+                  validCheck
                 
                 
                 }
