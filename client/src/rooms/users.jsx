@@ -15,6 +15,7 @@ import {
 export const Users = (props) => {
   
   let randomAvatar = Math.floor(Math.random() * avatarImages.length);
+  
   let picture = avatarImages[randomAvatar]
 
   return (
@@ -23,11 +24,13 @@ export const Users = (props) => {
 
       <Stack direction='column'>
         
+      <div className="user-bar">
         <Avatar src={picture}>,
         <AvatarBadge boxSize='1.25em' bg='green.500' />
         </Avatar>
+        </div>
       </Stack>
-      <Text>{props.username}</Text>
+      <h3><Text>{props.username}</Text></h3>
 
     </>
   );
