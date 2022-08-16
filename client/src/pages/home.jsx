@@ -24,7 +24,7 @@ export const Home = (props) => {
     if(response.data === "User already exists!") {
       setErrorMessage(response.data)
     } else { 
-      setUsername(setInputUsername);
+      setUsername(input_username);
       setEntername_status(true);
     }
   })
