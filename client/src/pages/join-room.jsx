@@ -30,8 +30,9 @@ export const JoinRoom = () => {
   const [entername_status, setEntername_status] = useState(false);
   const [createRoomMode, setCreatRoomMode] = useState(false);
   const [inputRoom, setInputRoom] = useState("");
- 
+  
 
+ 
 
 useEffect(()=> {
   setError("")
@@ -47,21 +48,38 @@ useEffect(()=> {
 
   }, []);
 
-const validCheck = function(room_id) {
+  const updateRoomlist=()=> {
+    axios.get("/study_rooms").then((response) => {
+      setRoomList(response.data);
+
+    });
+
+  }
+
+const validCheck = ()=> {
   console.log("validworks")
+  console.log("inputroom",inputRoom)
   
-  axios.get(`/study_rooms/room_info/${room_id}`).then(res => {
-    console.log("res", res.data)
+  axios.get(`/study_rooms/room_info/${inputRoom}`).then(res => {
+    console.log("res", res)
+    
     if(res.data.error) {
-      return setError(`${res.data.error}...`)
+       setError(`${res.data.error}...`)
     }
-    else if(!res.data.error) {
+    
+    
+    else {
+      console.log("length", res.data.entered_users.length)
+      
       if(res.data.entered_users.length >= 7) {
-        return setError("this room is currently full...")}
-      else if(res.data.entered_users >=0 && res.data.entered_users < 7) {
+        setError("this room is currently full...")}
+      else if(res.data.entered_users.length < 7) {
+        console.log("available")
          setError("")
-         setRoom(room_id)
-         return true
+         setRoom(parseInt(inputRoom))
+         setInputRoom("")
+        //  joinRoom()
+         
 
       } 
 
@@ -77,7 +95,7 @@ const validCheck = function(room_id) {
 
   }, [room]);
 
-  const joinRoom = async () => {
+  const joinRoom =  () => {
     console.log("joinRoom is working");
     console.log("roomid ", room);
     if (username !== "" && room !== "") {
@@ -85,8 +103,8 @@ const validCheck = function(room_id) {
       let data = { user: username, room_id: room };
       socket.emit("join_room", data);
       // setShowChat(true);
-      await axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
-        setUsersLists([...res.data]);
+       axios.get(`/study_rooms/${data.room_id}/enter/${data.user}`).then((res) => {
+        setUsersLists(res.data);
 
       }).then(() => {
         setJoinStatus(true);
@@ -162,11 +180,9 @@ const validCheck = function(room_id) {
                   />
                   {error && <p>{error}</p>}
                 </div>
-                <div><Button onClick={() => {
-                  validCheck(inputRoom)
-                  
-                  
-                } 
+                <div><Button onClick={ 
+                  // setRoom(inputRoom)
+                  validCheck
                 
                 
                 }
@@ -186,8 +202,11 @@ const validCheck = function(room_id) {
               </form>
             </div>
           </div>
+          <Button className='refresh'  size = "md" onClick={updateRoomlist}>Refresh List</Button>
 
           <div className="room-list">
+            
+            
 
             {roomList.map(studyroom => <RoomListItem key={studyroom.id} {...studyroom}
               setRoom={setRoom}

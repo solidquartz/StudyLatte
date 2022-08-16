@@ -80,8 +80,11 @@ export const RoomListItem = (props) => {
               my={5}
               w="100%"
               onClick={handleClick}
+              disabled = {props.entered_users.length >=7}
             >
-              Join Room
+              {props.entered_users.length >= 7 && <>FULL</>}
+              {props.entered_users.length < 7 && <>Join Room</>}
+              
 
             </Button>
 
