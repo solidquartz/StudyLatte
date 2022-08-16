@@ -48,6 +48,14 @@ useEffect(()=> {
 
   }, []);
 
+  const updateRoomlist=()=> {
+    axios.get("/study_rooms").then((response) => {
+      setRoomList(response.data);
+
+    });
+
+  }
+
 const validCheck = ()=> {
   console.log("validworks")
   console.log("inputroom",inputRoom)
@@ -69,6 +77,7 @@ const validCheck = ()=> {
         console.log("available")
          setError("")
          setRoom(parseInt(inputRoom))
+         setInputRoom("")
         //  joinRoom()
          
 
@@ -193,8 +202,11 @@ const validCheck = ()=> {
               </form>
             </div>
           </div>
+          <Button className='refresh'  size = "md" onClick={updateRoomlist}>Refresh List</Button>
 
           <div className="room-list">
+            
+            
 
             {roomList.map(studyroom => <RoomListItem key={studyroom.id} {...studyroom}
               setRoom={setRoom}
