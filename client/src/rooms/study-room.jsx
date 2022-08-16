@@ -88,7 +88,9 @@ export const StudyRoom = (props) => {
         <div className="study-header">
 
           <div>
-            <h2>Hey {username}, you are in roomID {room}</h2>
+            <h1>Hey {username}, welcome to {title}</h1>
+          </div>
+          <div>
             <Button type="button" onClick={props.removeUser}>
               Leave Room
             </Button>
@@ -98,7 +100,7 @@ export const StudyRoom = (props) => {
         <div className="study-components">
           <div className="left-study-bar">
             <div className="users-component">
-              <h2 size="sm">Study Buddies </h2>
+              <h2>Study Buddies </h2>
               {users}
             </div>
           </div>
