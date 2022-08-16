@@ -1,6 +1,7 @@
 import {
   Heading,
   Avatar,
+  AvatarBadge,
   Stack,
   Text,
   propNames
@@ -19,8 +20,9 @@ export const Users = (props) => {
        
       <Stack direction='column'>
         
-        <Avatar src={picture} />,
-       
+        <Avatar src={picture}>,
+        <AvatarBadge boxSize='1.25em' bg='green.500' />
+        </Avatar>
       </Stack>
       <Text>{props.username}</Text>
     </>
