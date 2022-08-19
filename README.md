@@ -3,7 +3,7 @@
 A virtual study room with chat and customizable timers to study with your friends!
 Our final project at Lighthouse Labs, developed in under 2 weeks after our 12-week intensive Web Development bootcamp.
 
-[The StudyLatte homepage](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-home.png?raw=true)
+![The StudyLatte homepage](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-home.png?raw=true)
 
 ## The Team
 -Aky Mac Donald (Front End & Design, Socket)
@@ -14,15 +14,15 @@ Our final project at Lighthouse Labs, developed in under 2 weeks after our 12-we
 
 Have you ever gone to a cafe to study, work, or focus? Have you ever shared that experience with friends? There’s something about it that makes it easier and more fun. During lockdowns when everything was online, it was hard to have that experience. Inspired by “Study With Me” videos on YouTube, we have created StudyLatte. 
 
-[The StudyLatte Join Room Page](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-join.png?raw=true)
+![The StudyLatte Join Room Page](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-join.png?raw=true)
 
 StudyLatte is a virtual study cafe that you can join with friends. If you’re a student, remote worker, or someone who studies for fun, this app is for you. It’s motivating and easier to focus when you study together. You can motivate each other and be accountable.
 
-[The StudyLatte Study Room](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-studyroom.png?raw=true)
+![The StudyLatte Study Room](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-studyroom.png?raw=true)
 
 In StudyLatte, everyone shares a synced up, customizable timer. There is even an instant message feature for break time. The beautiful images make the experience more immersive and relaxing. We used React, Sass, Chakra UI, and Socket IO with Express to make this experience come to life.
 
-[Closeup of the StudyLatte Timer](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-timer.png?raw=true)
+![Closeup of the StudyLatte Timer](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-timer.png?raw=true)
 
 ## Final Thoughts
 
