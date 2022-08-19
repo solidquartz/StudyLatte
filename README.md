@@ -6,9 +6,9 @@ Our final project at Lighthouse Labs, developed in under 2 weeks after our 12-we
 ![The StudyLatte homepage](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-home.png?raw=true)
 
 ## The Team
--Aky Mac Donald (Front End & Design, Socket)
--Sae On Ju (Back End & Database, Socket)
--Ricardo Moura (Back End), Socket
+- Aky Mac Donald (Front End & Design, Socket)
+- Sae On Ju (Back End & Database, Socket)
+- Ricardo Moura (Back End), Socket
 
 ## About StudyLatte
 
@@ -29,3 +29,5 @@ In StudyLatte, everyone shares a synced up, customizable timer. There is even an
 There are many features we would love to add to StudyLatte, such as ambient sounds or lo-fi music. We would love to add customization options such as different backgrounds to choose from, or password-protected rooms. We also want to give users the ability to track their study time and topics, and even have a point system to motivate everyone.
 
 Thank you for taking a look at our app. It was a huge challenge, but we’re so proud of what we accomplished. Learning how to give users a shared experience was so interesting, and we hope it will motivate everyone to study with their friends. StudyLatte can’t pour you a coffee, but it can connect you no matter where you are!
+
+[See a demo of the StudyLatte Study Room here!](https://youtu.be/ofQ0QPL2zJ8)
