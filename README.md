@@ -20,9 +20,31 @@ StudyLatte is a virtual study cafe that you can join with friends. If you’re a
 
 ![The StudyLatte Study Room](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-studyroom.png?raw=true)
 
-In StudyLatte, everyone shares a synced up, customizable timer. There is even an instant message feature for break time. The beautiful images make the experience more immersive and relaxing. We used React, Sass, Chakra UI, and Socket IO with Express to make this experience come to life.
+In StudyLatte, everyone shares a synced up, customizable timer. There is even an instant message feature for break time. The beautiful images make the experience more immersive and relaxing.
 
 ![Closeup of the StudyLatte Timer](https://github.com/solidquartz/StudyLatte/blob/main/client/public/docs/studylatte-timer.png?raw=true)
+
+
+## Getting Started
+
+1. Fork this repository, then clone your fork of this repository.
+2. Install dependencies with `npm install` in both the client and server folders.
+3. Start the web server using `npm start` while in the server folder. Repeat in the client folder.
+4. Go to <http://localhost:3000/> in your browser.
+
+
+## Tech Stack
+
+- React
+- Express
+- JSX
+- Sass
+- Chakra UI
+- PostgreSQL
+- Socket.IO
+- Formik
+- Yup
+
 
 ## Final Thoughts
 
